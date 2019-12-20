@@ -1,0 +1,19 @@
+.header {
+    width: 100%;
+    background-color: $purple;
+    color: #14FFF7;
+
+    &__links-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+    }
+    &__links {
+        color: $gray;
+        font-weight: 600;
+        font-size: 2rem;
+        margin: 0px 20px;
+    }
+}

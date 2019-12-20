@@ -1,0 +1,40 @@
+html {
+    font-size: 62.5%; // 1rem is 10px
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: 'montserrat';
+}
+
+body {
+    overflow-x: hidden;
+    font-weight: normal;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.title {
+    background: url('https://thumbs.gfycat.com/RemoteImpishBlackbear-poster.jpg') no-repeat center center fixed; 
+    background-size: 100%;
+}
+
+.app {
+    display: grid;
+    justify-items: center;
+}
+
+$light-gray: #F4FAFF;
+$gray: #C9DAEA;
+$purple: #2C0054;
+$sky-blue: #14FFF7;
+
+@import './Header/header.scss';
+@import './Header/title.scss';

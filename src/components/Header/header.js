@@ -5,7 +5,7 @@ export default class Header extends Component {
     return (
         <div className='header'>
             <div className='header__links-wrapper'>
-                <div className='header__links'>
+                <div className='header__links active'>
                     Music
                 </div>
                 <div className='header__links'>

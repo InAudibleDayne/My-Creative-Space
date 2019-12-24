@@ -1,0 +1,47 @@
+.auth-page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100vh - 250px);
+    width: 100vw;
+
+    .slideshow-wrapper {
+        background-size: cover;
+    }
+
+    .login{
+        color: $sky-blue;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .auth-form-wrapper {
+            @include input-element();
+            @include base-grid();
+            grid-gap: 21px;
+            padding: 42px;
+            width: 80%;
+                .form-group {
+                    display: flex;
+                
+                    svg{
+                        font-size: 2em;
+                        color: $light-gray;
+                        margin-right: 15px;
+                    }
+                }
+        }
+
+        button {
+            height: 40px;
+            width: 80px;
+            background-color: $magenta;
+            border-radius: 20px;
+            color: $light-gray;
+            font-size: 2rem;
+            font-weight: 600;
+
+        }
+    }
+}
+

@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from './Header/header';
 import Title from './Header/title';
 import BlogContainer from './Blog/blogContainer';
-import Login from './Auth/login';
 import Icons from "../Helpers/icons";
+import Auth from './Pages/auth';
 
 
 export default class App extends Component {
@@ -19,7 +19,30 @@ export default class App extends Component {
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN"
     }
+
+    this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
+    this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
+    this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
   }
+
+  handleSuccessfulLogin() {
+    this.setState({
+      loggedInStatus: "LOGGED_IN"
+    })
+  }
+
+  handleUnsuccessfulLogin() {
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN"
+    })
+  }
+
+  handleSuccessfulLogout() {
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN"
+    });
+  }
+
   render() {
     return (
       <div className='app'>
@@ -27,7 +50,7 @@ export default class App extends Component {
           <Title />
           <Header />
           <Route exact path='/' component={BlogContainer} />
-          <Route exact path='/login' component={Login} />
+          <Route exact path='/login' component={Auth} />
         </Router>
       </div>
     );

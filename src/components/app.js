@@ -48,7 +48,6 @@ export default class App extends Component {
       <div className='app'>
         <Router>
           <Title />
-          <Header />
           <Route exact path='/' component={BlogContainer} />
           <Route exact path='/login' component={Auth} />
         </Router>

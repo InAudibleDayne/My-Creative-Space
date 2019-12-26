@@ -1,5 +1,11 @@
-.blog-container {
-    width: 80vw;
-    height: 100vh;
-    background-color: $light-gray;
+.content{
+    width: 100vw;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    .blog-container {
+        width: 80vw;
+        height: 100vh;
+        background-color: $light-gray;
+    }
 }

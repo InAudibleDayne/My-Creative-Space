@@ -8,15 +8,22 @@
         align-items: center;
         justify-content: center;
         height: 50px;
+        a{
+            color: $gray;
+            font-weight: 600;
+            font-size: 2rem;
+            margin: 0px 20px;
+            }
     }
     &__links {
         color: $gray;
         font-weight: 600;
         font-size: 2rem;
-        margin: 0px 20px;
+        margin: 0px 20px;  
     }
 }
 
 .active {
     color: $magenta;
+    a{ color: $magenta; }
 }

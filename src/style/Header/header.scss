@@ -1,29 +1,50 @@
 .header {
     width: 100%;
     background-color: $purple;
-
+    &__bar-wrapper{
+        display: grid;
+        grid-template-columns: 100px [s] 1fr [e] 50px [z] 50px;
+    }
     &__links-wrapper {
+        grid-column: s/e;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         height: 50px;
-        a{
-            color: $gray;
-            font-weight: 600;
-            font-size: 2rem;
-            margin: 0px 20px;
-            }
     }
     &__links {
         color: $gray;
         font-weight: 600;
         font-size: 2rem;
-        margin: 0px 20px;  
+        margin: 0px 20px;
+        &:hover {
+            cursor: pointer;
+            color: $light-gray;
+        }  
+        a:hover {
+            text-decoration: none;
+            color: $light-gray;
+        }
+    }
+    &__login-wrapper{
+        grid-column: e/z;
+    }
+    &__login {
+        color: $gray;
+        font-weight: 600;
+        font-size: 2rem;
+        margin-top: 10px;
+        a:hover {
+            text-decoration: none;
+            color: $light-gray;
+        }
     }
 }
 
 .active {
     color: $magenta;
-    a{ color: $magenta; }
+    &:hover {
+        color: $magenta;
+    }
 }

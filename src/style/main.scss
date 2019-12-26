@@ -29,6 +29,13 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+a {
+    color: $gray;
+    a:hover {
+        color: $light-gray;
+    }
+}
+
 .title {
     background: url('https://thumbs.gfycat.com/RemoteImpishBlackbear-poster.jpg') no-repeat center center fixed; 
     background-size: auto;

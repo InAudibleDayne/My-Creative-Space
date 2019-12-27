@@ -56,8 +56,9 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
 border-bottom: 1px solid $magenta;
--webkit-text-fill-color: $magenta;
+-webkit-text-fill-color: $light-gray;
 -webkit-box-shadow: 0 0 0px 1000px $space inset;
+box-shadow: 0 0 0px 1000px $space inset;
 transition: background-color 5000s ease-in-out 0s;
 }
 

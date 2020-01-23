@@ -1,6 +1,10 @@
 // webpack plugins
 const SplitChunksPlugin = require('webpack/lib/optimize/SplitChunksPlugin');
 
+const path = require('path');
+
+const SRC = path.resolve(__dirname, 'node_modules');
+
 module.exports = {
   entry: {
     app: ['./src/bootstrap.js'],
@@ -35,6 +39,15 @@ module.exports = {
         test: /\.(mp4|webm)$/,
         loader: 'url?limit=10000',
       },
+
+      {
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        include: SRC,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
+      }
     ],
   },
 

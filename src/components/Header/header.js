@@ -7,7 +7,7 @@ export default class Header extends Component {
 
         this.state = {
             currentPage: this.props.currentPage,
-            active: ''
+            active: 'all'
         }
 
         this.homeLinks = this.homeLinks.bind(this);
@@ -26,6 +26,9 @@ export default class Header extends Component {
         return (
             <div className='header__bar-wrapper'>
                 <div className='header__links-wrapper'>
+                    <div id='all' className={`header__links ${this.state.active === 'all' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                        All
+                    </div>
                     <div id='music' className={`header__links ${this.state.active === 'music' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         Music
                     </div>

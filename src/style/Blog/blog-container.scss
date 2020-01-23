@@ -5,7 +5,11 @@
     justify-items: center;
     .blog-container {
         width: 80vw;
-        height: 100vh;
-        background-color: $light-gray;
+        height: 100%;
+        background-color: $space;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+        justify-content: center;
     }
 }

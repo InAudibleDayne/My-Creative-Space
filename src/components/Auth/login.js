@@ -8,7 +8,7 @@ export default class Login extends Component {
         this.state = {
           email: "",
           password: "",
-          errorText: ""
+          errorText: "",
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -25,6 +25,10 @@ export default class Login extends Component {
       handleSubmit(event) {
           console.log('Form Submitted', event);
           event.preventDefault();
+          this.setState({
+              email: "",
+              password: ""
+          });
       }
   render() {
     return (

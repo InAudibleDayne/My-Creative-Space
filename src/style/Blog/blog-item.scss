@@ -1,11 +1,11 @@
 .blog-item-wrapper {
     width: 100vw;
-    height: 20vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     margin-top: 50px;
+    margin-bottom: 25px;
 
     
     .left-side{
@@ -22,6 +22,13 @@
                 text-decoration: none;
             }
         }
+
+        img {
+            height: auto;
+            width: auto;
+            max-width: 38vw;
+            max-height: 100%;
+        }
     }
 
     .right-side{
@@ -34,4 +41,17 @@
         font-weight: 300;
         color: $deep-gray;
     }
+}
+
+.music {
+    height: 20vh;
+}
+
+.videos {
+    height: 35vh;
+    padding-top: 70px;
+}
+
+.art {
+    padding-top: 60px;
 }

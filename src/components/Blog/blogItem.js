@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Truncate from "react-truncate";
 import AudioPlayer from 'react-h5-audio-player';
+import ReactPlayer from 'react-player';
 
 
 export default class BlogItem extends Component {
@@ -20,12 +21,20 @@ export default class BlogItem extends Component {
     };
 
     tagCreator() {
-        if (this.state.blog_category === "MUSIC") {
+        if (this.state.blog_category === "music") {
             return <AudioPlayer
                 src={`${this.state.file_location}`}
                 onPlay={e => console.log("onPlay")}
                 showVolumeControl={true}
                 />
+        } else if (this.state.blog_category === "videos") {
+            return <ReactPlayer 
+                url={`${this.state.file_location}`}
+                playing={false}
+                controls={true}
+                />
+        } else if (this.state.blog_category === "art") {
+            return <img src={this.state.file_location}/> 
         }
     }
 
@@ -35,7 +44,7 @@ export default class BlogItem extends Component {
 
     render() {
         return (
-            <div className='blog-item-wrapper'>
+            <div className={`blog-item-wrapper ${this.state.blog_category}`}>
                 <div className='left-side'>
                     <Link to={`/b/${this.state.id}`}>
                         <h1>{this.state.title}</h1>
@@ -46,7 +55,7 @@ export default class BlogItem extends Component {
                 </div>
                 <div className='right-side'>
                     <Truncate 
-                    lines={3}
+                    lines={5}
                     ellipsis={
                         <span>
                         ... <Link to={`/b/${this.state.id}`}>Read More</Link>

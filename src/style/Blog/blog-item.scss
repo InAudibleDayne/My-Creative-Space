@@ -5,14 +5,16 @@
     justify-content: space-around;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 
     
     .left-side{
+        width: 40vw;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 10px;
         a {
             h1{
             color: $magenta;
@@ -53,5 +55,34 @@
 }
 
 .art {
-    padding-top: 60px;
+    padding-top: 20px;
+}
+
+.books {
+    height: 35vh;
+    padding-top: 20px;
+    p {
+        color: $light-gray;
+    }
+}
+
+.pdf {
+    height: 35vh;
+    width: 40vw;
+    overflow: scroll;
+}
+
+.pdf-buttons {
+    button {
+        color: $light-gray;
+        background-color: $magenta;
+        border-radius: 3px;
+        border: none;
+        padding: 0px 5px;
+        margin: 0px 5px;
+    }
+    button:disabled,
+    button[disabled] {
+        background-color: $deep-gray ;
+    }
 }

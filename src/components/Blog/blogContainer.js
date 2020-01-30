@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from '../Header/header';
 import BlogItem from './blogItem';
 
+
+
 export default class BlogContainer extends Component {
   constructor(props) {
     super(props) 
@@ -14,18 +16,35 @@ export default class BlogContainer extends Component {
         {id: 4, title: "Image Test", description: "This is a test of the Image display", blog_category: "art", file_location: "../../../assets/test_items/unchain_your_bleeding_heart.jpg"},
         {id: 5, title: "PDF Test", description: "This is a test of a book blog", blog_category: "books", file_location:"../../../assets/test_items/dummy.pdf"},
         {id: 6, title: "PDF Test", description: "This is a test of a book blog", blog_category: "books", file_location:"../../../assets/test_items/excerpts.pdf"}
-      ]
+      ],
+      search: ''
     }
+    
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      search: event.target.value
+    })
   }
   
   render() {
     const blogRecords = this.state.blogItems.map(blogItem => {
-      console.log(blogItem)
       return <BlogItem key={blogItem.id} blogItem={blogItem} />
     })
     return (
         <div>
             <Header currentPage='HOME'/>
+            <div className="search-wrapper">
+              <input 
+                name="search"
+                type='text'
+                placeholder="Search"
+                value={this.state.search}
+                onChange={this.handleChange}
+              />
+            </div>
             <div className='content'>
                 <div className='blog-container'>
                     {blogRecords}

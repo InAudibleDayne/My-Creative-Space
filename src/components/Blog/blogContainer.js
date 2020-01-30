@@ -21,6 +21,11 @@ export default class BlogContainer extends Component {
     }
     
     this.handleChange = this.handleChange.bind(this);
+    this.filterResults = this.filterResults.bind(this);
+  }
+
+  filterResults = (activeFilter) => {
+    console.log(activeFilter);
   }
 
   handleChange = (event) => {
@@ -35,7 +40,7 @@ export default class BlogContainer extends Component {
     })
     return (
         <div>
-            <Header currentPage='HOME'/>
+            <Header currentPage='HOME' filters={this.filterResults}/>
             <div className="search-wrapper">
               <input 
                 name="search"

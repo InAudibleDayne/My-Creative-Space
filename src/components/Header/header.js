@@ -20,6 +20,7 @@ export default class Header extends Component {
         this.setState({
             active: element.id
         });
+        this.props.filters(this.state.active);
     }
 
     homeLinks() {

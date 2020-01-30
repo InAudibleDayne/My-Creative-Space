@@ -17,10 +17,12 @@ export default class Header extends Component {
 
     handleClick(event) {
         var element = event.target;
-        this.setState({
-            active: element.id
-        });
-        this.props.filters(this.state.active);
+        if (element.id !== this.state.active) {
+            this.setState({
+                active: element.id
+            });
+            this.props.filters(element.id);
+        }
     }
 
     homeLinks() {

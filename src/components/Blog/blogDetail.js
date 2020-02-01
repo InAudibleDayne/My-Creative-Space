@@ -21,6 +21,7 @@ export default class BlogDetail extends Component {
     this.changePage = this.changePage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillMount() {
@@ -98,6 +99,10 @@ export default class BlogDetail extends Component {
     }
   }
 
+  handleLogout () {
+    this.props.handleSuccessfulLogout();
+  }
+
   render() {
     const {
       title,
@@ -107,7 +112,7 @@ export default class BlogDetail extends Component {
 
     return (
         <div className="blog-detail">
-          <Header currentPage='BLOG_DETAIL' />
+          <Header currentPage='BLOG_DETAIL' loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout}/>
           <div className="blog-detail__container">
             <div className='blog-detail__title'>
               {title}

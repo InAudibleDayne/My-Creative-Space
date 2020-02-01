@@ -53,7 +53,9 @@ export default class App extends Component {
             <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
           )} />
           <Route exact path='/login' component={Auth} />
-          <Route exact path='/b/:slug' component={BlogDetail} />
+          <Route exact path='/b/:slug' render={props => (
+            <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
+          )} />
         </Router>
       </div>
     );

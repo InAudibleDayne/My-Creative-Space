@@ -88,7 +88,7 @@ export default class Header extends Component {
                 </div>
                 <div className='header__login-wrapper'>
                     <div className='header__login'>
-                        <Link to='/login'>Login</Link>
+                        {this.loginLogoutDecider()}
                     </div>
                 </div>
             </div>

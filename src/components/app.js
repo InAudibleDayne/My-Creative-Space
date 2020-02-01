@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from './Header/header';
 import Title from './Header/title';
 import BlogContainer from './Blog/blogContainer';
+import BlogDetail from './Blog/blogDetail';
 import Icons from "../Helpers/icons";
 import Auth from './Pages/auth';
 
@@ -50,6 +51,7 @@ export default class App extends Component {
           <Title />
           <Route exact path='/' component={BlogContainer} />
           <Route exact path='/login' component={Auth} />
+          <Route exact path='/b/:slug' component={BlogDetail} />
         </Router>
       </div>
     );

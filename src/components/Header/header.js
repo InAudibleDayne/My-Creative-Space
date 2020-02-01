@@ -64,11 +64,29 @@ export default class Header extends Component {
         )
     }
 
+    blogLinks() {
+        return(
+            <div className='header__bar-wrapper'>
+                <div className='header__links-wrapper'>
+                    <div className='header__links'>
+                        <Link to='/'>Home</Link>
+                    </div>
+                </div>
+                <div className='header__login-wrapper'>
+                    <div className='header__login'>
+                        <Link to='/login'>Login</Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
   render() {
     return (
         <div className='header'>
         {this.state.currentPage === 'HOME' ? (this.homeLinks()) : null}
         {this.state.currentPage === 'AUTH' ? (this.authLinks()) : null}
+        {this.state.currentPage === 'BLOG_DETAIL' ? (this.blogLinks()) : null}
         </div>
     );
   }

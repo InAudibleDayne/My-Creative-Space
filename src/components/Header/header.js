@@ -13,6 +13,7 @@ export default class Header extends Component {
         this.homeLinks = this.homeLinks.bind(this);
         this.authLinks = this.authLinks.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.loginLogoutDecider = this.loginLogoutDecider.bind(this);
     }
 
     handleClick(event) {
@@ -22,6 +23,18 @@ export default class Header extends Component {
                 active: element.id
             });
             this.props.filters(element.id);
+        }
+    }
+
+    handleSignOut() {
+        //TODO send signout signal
+    }
+
+    loginLogoutDecider() {
+        if (this.props.loggedInStatus === 'NOT_LOGGED_IN') {
+            return <Link to='/login'>Login</Link>
+        } else {
+            return <a onClick={this.handleSignOut}>Logout</a>
         }
     }
 
@@ -47,7 +60,7 @@ export default class Header extends Component {
                 </div>
                 <div className='header__login-wrapper'>
                     <div className='header__login'>
-                        <Link to='/login'>Login</Link>
+                        {this.loginLogoutDecider()}
                     </div>
                 </div>
             </div>

@@ -49,7 +49,9 @@ export default class App extends Component {
       <div className='app'>
         <Router>
           <Title />
-          <Route exact path='/' component={BlogContainer} />
+          <Route exact path='/' render={props => (
+            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} />
+          )} />
           <Route exact path='/login' component={Auth} />
           <Route exact path='/b/:slug' component={BlogDetail} />
         </Router>

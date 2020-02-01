@@ -67,25 +67,25 @@ export default class BlogItem extends Component {
                 >
                     <Page pageNumber={pageNumber} />
                 </Document>
-                    <div className="pdf-buttons">
-                        <p>
-                            Page {this.state.pageNumber || (this.state.numPages ? 1 : '--')} of {this.state.numPages || '--'}
-                        </p>
-                        <button
-                            type="button"
-                            disabled={this.state.pageNumber <= 1}
-                            onClick={this.previousPage}
-                        >
-                            Previous
-                        </button>
-                        <button
-                            type="button"
-                            disabled={this.state.pageNumber >= this.state.numPages}
-                            onClick={this.nextPage}
-                        >
-                            Next
-                        </button>
-                    </div> 
+                <div className="pdf-buttons">
+                    <p>
+                        Page {this.state.pageNumber || (this.state.numPages ? 1 : '--')} of {this.state.numPages || '--'}
+                    </p>
+                    <button
+                        type="button"
+                        disabled={this.state.pageNumber <= 1}
+                        onClick={this.previousPage}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        type="button"
+                        disabled={this.state.pageNumber >= this.state.numPages}
+                        onClick={this.nextPage}
+                    >
+                        Next
+                    </button>
+                </div> 
             </React.Fragment>
             )
         }

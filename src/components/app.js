@@ -18,7 +18,7 @@ export default class App extends Component {
     Icons(); 
 
     this.state = {
-      loggedInStatus: "NOT_LOGGED_IN"
+      loggedInStatus: "LOGGED_IN"
     }
 
     this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
@@ -50,7 +50,7 @@ export default class App extends Component {
         <Router>
           <Title />
           <Route exact path='/' render={props => (
-            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} />
+            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
           )} />
           <Route exact path='/login' component={Auth} />
           <Route exact path='/b/:slug' component={BlogDetail} />

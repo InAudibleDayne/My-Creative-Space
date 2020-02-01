@@ -22,6 +22,7 @@ export default class BlogContainer extends Component {
     
     this.handleChange = this.handleChange.bind(this);
     this.filterResults = this.filterResults.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   filterResults = (activeFilter) => {
@@ -33,6 +34,10 @@ export default class BlogContainer extends Component {
       search: event.target.value
     })
   }
+
+  handleLogout () {
+    this.props.handleSuccessfulLogout();
+  }
   
   render() {
     const blogRecords = this.state.blogItems.map(blogItem => {
@@ -40,7 +45,7 @@ export default class BlogContainer extends Component {
     })
     return (
         <div>
-            <Header currentPage='HOME' filters={this.filterResults} loggedInStatus={this.props.loggedInStatus} />
+            <Header currentPage='HOME' filters={this.filterResults} loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout}/>
             <div className="search-wrapper">
               <input 
                 name="search"

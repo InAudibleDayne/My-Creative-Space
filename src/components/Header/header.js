@@ -14,6 +14,7 @@ export default class Header extends Component {
         this.authLinks = this.authLinks.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.loginLogoutDecider = this.loginLogoutDecider.bind(this);
+        this.handleSignOut = this.handleSignOut.bind(this);
     }
 
     handleClick(event) {
@@ -27,7 +28,7 @@ export default class Header extends Component {
     }
 
     handleSignOut() {
-        //TODO send signout signal
+        this.props.handleLogout();
     }
 
     loginLogoutDecider() {

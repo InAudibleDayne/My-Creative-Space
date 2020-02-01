@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 import Header from './Header/header';
 import Title from './Header/title';
 import BlogContainer from './Blog/blogContainer';
@@ -49,13 +48,22 @@ export default class App extends Component {
       <div className='app'>
         <Router>
           <Title />
+          <Switch>
           <Route exact path='/' render={props => (
             <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
           )} />
-          <Route exact path='/login' component={Auth} />
+          <Route exact path='/login' render={props => (
+                  <Auth
+                    {...props}
+                    handleSuccessfulLogin={this.handleSuccessfulLogin}
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
+                  />
+                )} 
+                />
           <Route exact path='/b/:slug' render={props => (
             <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
           )} />
+          </Switch>
         </Router>
       </div>
     );

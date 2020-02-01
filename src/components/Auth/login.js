@@ -30,6 +30,7 @@ export default class Login extends Component {
               email: "",
               password: ""
           });
+          this.props.handleSuccessfulAuth();
       }
   render() {
     return (

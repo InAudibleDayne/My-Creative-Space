@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Login extends Component {
@@ -13,6 +15,7 @@ export default class Login extends Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
       }
     
       handleChange(event) {
@@ -20,6 +23,10 @@ export default class Login extends Component {
           [event.target.name]: event.target.value,
           errorText: ""
         });
+      }
+
+      responseGoogle = (response) => {
+        console.log(response);
       }
 
       handleSubmit(event) {
@@ -65,6 +72,14 @@ export default class Login extends Component {
               <button className="btn" type="submit">
                 Login
               </button>
+
+              <GoogleLogin
+                clientId="239390937938-vqum64b7vba20bvof5qjsm5a6e24ve4v.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              />,
             </form>
         </div>
     );

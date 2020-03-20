@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios';
 
 export default class Login extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export default class Login extends Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.responseGoogle = this.responseGoogle.bind(this);
+        this.successResponseGoogle = this.successResponseGoogle.bind(this);
       }
     
       handleChange(event) {
@@ -23,6 +23,21 @@ export default class Login extends Component {
           [event.target.name]: event.target.value,
           errorText: ""
         });
+      }
+
+      successResponseGoogle = (response) => {
+        var userName = response.profileObj.email;
+        console.log(userName);
+        axios({method: 'post',
+              url: 'http://localhost:5000/user',
+              data: {username: `${userName}`}})
+              .then(response => {
+                console.log(response);
+                this.props.handleSuccessfulAuth();
+              })
+              .catch(error => {
+                console.log("Login Error", error);
+              });
       }
 
       responseGoogle = (response) => {
@@ -76,7 +91,7 @@ export default class Login extends Component {
               <GoogleLogin
                 clientId="239390937938-vqum64b7vba20bvof5qjsm5a6e24ve4v.apps.googleusercontent.com"
                 buttonText="Login"
-                onSuccess={this.responseGoogle}
+                onSuccess={this.successResponseGoogle}
                 onFailure={this.responseGoogle}
                 cookiePolicy={'single_host_origin'}
               />,

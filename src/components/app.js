@@ -17,7 +17,8 @@ export default class App extends Component {
     Icons(); 
 
     this.state = {
-      loggedInStatus: "LOGGED_IN"
+      loggedInStatus: "LOGGED_IN",
+      firstName: ""
     }
 
     this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
@@ -25,9 +26,10 @@ export default class App extends Component {
     this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
   }
 
-  handleSuccessfulLogin() {
+  handleSuccessfulLogin(firstName) {
     this.setState({
-      loggedInStatus: "LOGGED_IN"
+      loggedInStatus: "LOGGED_IN",
+      firstName: `${firstName}`
     })
   }
 
@@ -39,7 +41,8 @@ export default class App extends Component {
 
   handleSuccessfulLogout() {
     this.setState({
-      loggedInStatus: "NOT_LOGGED_IN"
+      loggedInStatus: "NOT_LOGGED_IN",
+      firstName: ""
     });
   }
 
@@ -50,7 +53,7 @@ export default class App extends Component {
           <Title />
           <Switch>
           <Route exact path='/' render={props => (
-            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
+            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} />
           )} />
           <Route exact path='/login' render={props => (
                   <Auth
@@ -61,7 +64,7 @@ export default class App extends Component {
                 )} 
                 />
           <Route exact path='/b/:slug' render={props => (
-            <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} />
+            <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} />
           )} />
           </Switch>
         </Router>

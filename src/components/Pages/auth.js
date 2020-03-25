@@ -9,7 +9,7 @@ export default class Auth extends Component {
 
 
     this.state = {
-        currentSlide: cameraImg
+      currentSlide: cameraImg
     };
 
 
@@ -17,8 +17,8 @@ export default class Auth extends Component {
     this.handleUnsuccessfulAuth = this.handleUnsuccessfulAuth.bind(this);
   }
 
-  handleSuccessfulAuth() {
-    this.props.handleSuccessfulLogin();
+  handleSuccessfulAuth(loginName) {
+    this.props.handleSuccessfulLogin(loginName);
     this.props.history.push("/");
   }
 

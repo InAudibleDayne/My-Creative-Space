@@ -28,15 +28,13 @@ export default class Login extends Component {
       successResponseGoogle = (response) => {
         var userName = response.profileObj.email;
         var firstName = response.profileObj.givenName;
-        console.log(response);
         axios({method: 'post',
               url: 'http://localhost:5000/user',
               data: {username: `${userName}`, name: `${firstName}`}})
               .then(response => {
-                console.log(response);
                 var userId = response.data.id;
-                console.log(userId);
-                this.props.handleSuccessfulAuth();
+                var loginName = response.data.name;
+                this.props.handleSuccessfulAuth(loginName);
               })
               .catch(error => {
                 console.log("Login Error", error);

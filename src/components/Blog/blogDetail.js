@@ -112,7 +112,7 @@ export default class BlogDetail extends Component {
 
     return (
         <div className="blog-detail">
-          <Header currentPage='BLOG_DETAIL' loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout}/>
+          <Header currentPage='BLOG_DETAIL' loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout} firstName={this.props.firstName}/>
           <div className="blog-detail__container">
             <div className='blog-detail__title'>
               {title}

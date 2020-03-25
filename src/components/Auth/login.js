@@ -27,10 +27,11 @@ export default class Login extends Component {
 
       successResponseGoogle = (response) => {
         var userName = response.profileObj.email;
-        console.log(userName);
+        var firstName = response.profileObj.givenName;
+        console.log(response);
         axios({method: 'post',
               url: 'http://localhost:5000/user',
-              data: {username: `${userName}`}})
+              data: {username: `${userName}`, name: `${firstName}`}})
               .then(response => {
                 console.log(response);
                 var userId = response.data.id;

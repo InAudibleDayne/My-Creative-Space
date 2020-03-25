@@ -26,7 +26,7 @@ export default class BlogContainer extends Component {
   }
 
   filterResults = (activeFilter) => {
-    console.log(activeFilter);
+    
   }
 
   handleChange = (event) => {

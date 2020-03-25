@@ -3,7 +3,7 @@
     background-color: $purple;
     &__bar-wrapper{
         display: grid;
-        grid-template-columns: 100px [s] 1fr [e] 50px [z] 50px;
+        grid-template-columns: 100px [s] 1fr [e] 150px [z] 50px;
     }
     &__links-wrapper {
         grid-column: s/e;

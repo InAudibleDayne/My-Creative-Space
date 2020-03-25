@@ -35,7 +35,7 @@ export default class Header extends Component {
         if (this.props.loggedInStatus === 'NOT_LOGGED_IN') {
             return <Link to='/login'>Login</Link>
         } else {
-            return <a className="logout" onClick={this.handleSignOut}>Hey {this.props.firstName},</a>
+            return <a className="logout" onClick={this.handleSignOut}>{this.props.firstName}</a>
         }
     }
 

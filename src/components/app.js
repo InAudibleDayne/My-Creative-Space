@@ -17,8 +17,9 @@ export default class App extends Component {
     Icons(); 
 
     this.state = {
-      loggedInStatus: "LOGGED_IN",
-      firstName: ""
+      loggedInStatus: "NOT_LOGGED_IN",
+      firstName: "",
+      userId: 0
     }
 
     this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
@@ -26,11 +27,13 @@ export default class App extends Component {
     this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
   }
 
-  handleSuccessfulLogin(firstName) {
+  handleSuccessfulLogin(firstName, userId) {
     this.setState({
       loggedInStatus: "LOGGED_IN",
-      firstName: `${firstName}`
+      firstName: `${firstName}`,
+      userId: `${userId}`
     })
+    console.log(this.state.userId);
   }
 
   handleUnsuccessfulLogin() {

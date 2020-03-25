@@ -34,7 +34,7 @@ export default class Login extends Component {
               .then(response => {
                 var userId = response.data.id;
                 var loginName = response.data.name;
-                this.props.handleSuccessfulAuth(loginName);
+                this.props.handleSuccessfulAuth(loginName, userId);
               })
               .catch(error => {
                 console.log("Login Error", error);

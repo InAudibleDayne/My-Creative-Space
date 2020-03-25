@@ -23,10 +23,15 @@ export default class BlogContainer extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.filterResults = this.filterResults.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.getBlogItems = this.getBlogItems.bind(this);
+  }
+
+  getBlogItems() {
+    //TO DO write query to pull blog items
   }
 
   filterResults = (activeFilter) => {
-    
+    //TO DO write query to pull blogs with filter
   }
 
   handleChange = (event) => {
@@ -35,7 +40,7 @@ export default class BlogContainer extends Component {
     })
   }
 
-  handleLogout () {
+  handleLogout() {
     this.props.handleSuccessfulLogout();
   }
   

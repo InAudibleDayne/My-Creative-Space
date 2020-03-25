@@ -8,6 +8,7 @@ import BlogContainer from './Blog/blogContainer';
 import BlogDetail from './Blog/blogDetail';
 import Icons from "../Helpers/icons";
 import Auth from './Pages/auth';
+import AccountPage from './Pages/account';
 
 
 export default class App extends Component {
@@ -68,6 +69,9 @@ export default class App extends Component {
                 />
           <Route exact path='/b/:slug' render={props => (
             <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} />
+          )} />
+          <Route exact path='/user-account/:slug' render={props => (
+            <AccountPage {...props} firstName={this.state.firstName}/>
           )} />
           </Switch>
         </Router>

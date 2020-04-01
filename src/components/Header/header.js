@@ -6,7 +6,6 @@ export default class Header extends Component {
         super(props)
 
         this.state = {
-            currentPage: this.props.currentPage,
             active: 'all'
         }
 
@@ -98,9 +97,10 @@ export default class Header extends Component {
   render() {
     return (
         <div className='header'>
-        {this.state.currentPage === 'HOME' ? (this.homeLinks()) : null}
-        {this.state.currentPage === 'AUTH' ? (this.authLinks()) : null}
-        {this.state.currentPage === 'BLOG_DETAIL' ? (this.blogLinks()) : null}
+        {this.props.currentPage === 'HOME' ? (this.homeLinks()) : null}
+        {this.props.currentPage === 'AUTH' ? (this.authLinks()) : null}
+        {this.props.currentPage === 'NO_MATCH' ? (this.authLinks()) : null}
+        {this.props.currentPage === 'BLOG_DETAIL' ? (this.blogLinks()) : null}
         </div>
     );
   }

@@ -9,6 +9,7 @@ import BlogDetail from './Blog/blogDetail';
 import Icons from "../Helpers/icons";
 import Auth from './Pages/auth';
 import AccountPage from './Pages/account';
+import NoMatch from './Pages/noMatch';
 
 
 export default class App extends Component {
@@ -26,6 +27,7 @@ export default class App extends Component {
     this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
+    this.authorizedPages = this.authorizedPages.bind(this);
   }
 
   handleSuccessfulLogin(firstName, userId) {
@@ -50,6 +52,12 @@ export default class App extends Component {
     });
   }
 
+  authorizedPages() {
+    return [
+    <Route key='account-page' exact path='/user-account' component={AccountPage}/>
+    ]
+  }
+
   render() {
     return (
       <div className='app'>
@@ -70,9 +78,8 @@ export default class App extends Component {
           <Route exact path='/b/:slug' render={props => (
             <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} />
           )} />
-          <Route exact path='/user-account/:slug' render={props => (
-            <AccountPage {...props} firstName={this.state.firstName}/>
-          )} />
+          {this.state.loggedInStatus === "LOGGED_IN" ? (this.authorizedPages()) : null}
+          <Route component={NoMatch}/>
           </Switch>
         </Router>
       </div>

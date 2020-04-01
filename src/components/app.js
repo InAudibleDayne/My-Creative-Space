@@ -54,7 +54,9 @@ export default class App extends Component {
 
   authorizedPages() {
     return [
-    <Route key='account-page' exact path='/user-account' component={AccountPage}/>
+    <Route key='user-account' exact path='/user-account' render={props => (
+      <AccountPage {...props} loggedInStatus={this.state.loggedInStatus}/>
+      )}/>
     ]
   }
 

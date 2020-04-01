@@ -34,7 +34,10 @@ export default class Header extends Component {
         if (this.props.loggedInStatus === 'NOT_LOGGED_IN') {
             return <Link to='/login'>Login</Link>
         } else {
-            return <a className="logout" onClick={this.handleSignOut}>{this.props.firstName}</a>
+            return <div>
+                <Link className="logout" to='/user-account'>{this.props.firstName}</Link>
+                <a onClick={this.handleSignOut}>Logout</a>
+                </div>
         }
     }
 
@@ -94,6 +97,14 @@ export default class Header extends Component {
         )
     }
 
+    accountLinks() {
+        <div className='header__links-wrapper'>
+            <div className='header__links'>
+                <Link to='/'>Home</Link>
+            </div>
+        </div>
+    }
+
   render() {
     return (
         <div className='header'>
@@ -101,6 +112,7 @@ export default class Header extends Component {
         {this.props.currentPage === 'AUTH' ? (this.authLinks()) : null}
         {this.props.currentPage === 'NO_MATCH' ? (this.authLinks()) : null}
         {this.props.currentPage === 'BLOG_DETAIL' ? (this.blogLinks()) : null}
+        {this.props.currentPage === 'ACCOUNT_PAGE' ? (this.accountLinks()) : null}
         </div>
     );
   }

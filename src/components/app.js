@@ -55,7 +55,7 @@ export default class App extends Component {
   authorizedPages() {
     return [
     <Route key='user-account' exact path='/user-account' render={props => (
-      <AccountPage {...props} loggedInStatus={this.state.loggedInStatus}/>
+      <AccountPage {...props} loggedInStatus={this.state.loggedInStatus} loggedInId={this.state.userId} firstName={this.state.firstName}/>
       )}/>
     ]
   }
@@ -67,7 +67,7 @@ export default class App extends Component {
           <Title />
           <Switch>
           <Route exact path='/' render={props => (
-            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} />
+            <BlogContainer {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} userId={this.state.userId} />
           )} />
           <Route exact path='/login' render={props => (
                   <Auth

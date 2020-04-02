@@ -50,7 +50,7 @@ export default class BlogContainer extends Component {
     })
     return (
         <div>
-            <Header currentPage='HOME' filters={this.filterResults} loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout} firstName={this.props.firstName} />
+            <Header currentPage='HOME' filters={this.filterResults} loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout} firstName={this.props.firstName} userId={this.props.userId} />
             <div className="search-wrapper">
               <input 
                 name="search"

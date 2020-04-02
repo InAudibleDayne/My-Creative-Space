@@ -51,4 +51,8 @@
 
 .logout {
     cursor: pointer;
+
+    &__account-link {
+        margin-right: 15px;
+    }
 }

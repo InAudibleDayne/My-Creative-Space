@@ -14,6 +14,7 @@ export default class Header extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.loginLogoutDecider = this.loginLogoutDecider.bind(this);
         this.handleSignOut = this.handleSignOut.bind(this);
+        this.accountLinks = this.accountLinks.bind(this);
     }
 
     handleClick(event) {
@@ -34,9 +35,9 @@ export default class Header extends Component {
         if (this.props.loggedInStatus === 'NOT_LOGGED_IN') {
             return <Link to='/login'>Login</Link>
         } else {
-            return <div>
-                <Link className="logout" to='/user-account'>{this.props.firstName}</Link>
-                <a onClick={this.handleSignOut}>Logout</a>
+            return <div className='logout'>
+                <Link className="logout__account-link" to='/user-account'>Account</Link>
+                <a className="logout__logout-link" onClick={this.handleSignOut}>Logout</a>
                 </div>
         }
     }
@@ -98,11 +99,20 @@ export default class Header extends Component {
     }
 
     accountLinks() {
-        <div className='header__links-wrapper'>
-            <div className='header__links'>
-                <Link to='/'>Home</Link>
+        return(
+            <div className='header__bar-wrapper'>
+                <div className='header__links-wrapper'>
+                    <div className='header__links'>
+                        <Link to='/'>Home</Link>
+                    </div>
+                    <div className='header__login-wrapper'>
+                        <div className='header__login'>
+                            {this.loginLogoutDecider()}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        )
     }
 
   render() {
@@ -112,7 +122,7 @@ export default class Header extends Component {
         {this.props.currentPage === 'AUTH' ? (this.authLinks()) : null}
         {this.props.currentPage === 'NO_MATCH' ? (this.authLinks()) : null}
         {this.props.currentPage === 'BLOG_DETAIL' ? (this.blogLinks()) : null}
-        {this.props.currentPage === 'ACCOUNT_PAGE' ? (this.accountLinks()) : null}
+        {this.props.currentPage === 'ACCOUNT' ? (this.accountLinks()) : null}
         </div>
     );
   }

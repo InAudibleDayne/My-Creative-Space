@@ -29,22 +29,29 @@ export default class Header extends Component {
 
     handleSignOut() {
         this.props.handleLogout();
+        
     }
 
     loginLogoutDecider() {
         if (this.props.loggedInStatus === 'NOT_LOGGED_IN') {
-            return <Link to='/login'>Login</Link>
+            return <Link className="left" to='/login'>Login</Link>
         } else {
             return <div className='logout'>
                 <Link className="logout__account-link" to='/user-account'>Account</Link>
                 <a className="logout__logout-link" onClick={this.handleSignOut}>Logout</a>
-                </div>
+            </div>
         }
     }
 
     homeLinks() {
         return (
             <div className='header__bar-wrapper'>
+                <div className='header__title-wrapper'>
+                    {this.props.loggedInStatus === 'LOGGED_IN' ? (
+                    <div className='header__name'>
+                        Hey {this.props.firstName}!
+                    </div>) : null}
+                </div>
                 <div className='header__links-wrapper'>
                     <div id='all' className={`header__links ${this.state.active === 'all' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         All
@@ -101,13 +108,20 @@ export default class Header extends Component {
     accountLinks() {
         return(
             <div className='header__bar-wrapper'>
+                <div className='header__title-wrapper'>
+                    <div className='header__name'>
+                        {this.props.firstName}'s Account
+                    </div>
+                </div>
                 <div className='header__links-wrapper'>
                     <div className='header__links'>
                         <Link to='/'>Home</Link>
                     </div>
-                    <div className='header__login-wrapper'>
-                        <div className='header__login'>
-                            {this.loginLogoutDecider()}
+                </div>
+                <div className='header__login-wrapper'>
+                    <div className='header__login'>
+                        <div className='logout'>
+                            <a className="logout__logout-link left" onClick={this.handleSignOut}>Logout</a>
                         </div>
                     </div>
                 </div>

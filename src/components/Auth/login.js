@@ -60,43 +60,19 @@ export default class Login extends Component {
         <div>
             <h1>LOGIN TO ACCESS YOUR DASHBOARD</h1>
     
-            <div>{this.state.errorText}</div>
-    
-            <form onSubmit={this.handleSubmit} className="auth-form-wrapper">
-              <div className="form-group">
-              <FontAwesomeIcon icon="envelope" />
-              <input
-                type="email"
-                name="email"
-                placeholder="Your email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
+              <div className="google-login">
+                <h2>
+                  Login Through Google
+                </h2>
+                <GoogleLogin
+                  className="google-login__btn"
+                  clientId="239390937938-vqum64b7vba20bvof5qjsm5a6e24ve4v.apps.googleusercontent.com"
+                  buttonText="Login"
+                  onSuccess={this.successResponseGoogle}
+                  onFailure={this.responseGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
               </div>
-  
-              <div className="form-group">
-              <FontAwesomeIcon icon="lock" />
-              <input
-                type="password"
-                name="password"
-                placeholder="Your password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-              </div>
-  
-              <button className="btn" type="submit">
-                Login
-              </button>
-
-              <GoogleLogin
-                clientId="239390937938-vqum64b7vba20bvof5qjsm5a6e24ve4v.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={this.successResponseGoogle}
-                onFailure={this.responseGoogle}
-                cookiePolicy={'single_host_origin'}
-              />,
-            </form>
         </div>
     );
   }

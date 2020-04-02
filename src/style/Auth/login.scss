@@ -14,22 +14,17 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        .auth-form-wrapper {
-            @include input-element();
-            @include base-grid();
-            grid-gap: 21px;
-            padding: 42px;
-            width: 80%;
-                .form-group {
-                    display: flex;
-                
-                    svg{
-                        font-size: 2em;
-                        color: $light-gray;
-                        margin-right: 15px;
-                    }
-                }
+        
+        .google-login {
+            margin-top: 100px;
+            h2 {
+                color: $magenta;
+            }
+            &__btn {
+                width: 200px;
+                color: $magenta !important;
+                font-weight: 900 !important;
+            }
         }
 
         button {

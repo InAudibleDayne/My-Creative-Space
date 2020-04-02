@@ -3,7 +3,7 @@
     background-color: $purple;
     &__bar-wrapper{
         display: grid;
-        grid-template-columns: 100px [s] 1fr [e] 150px [z] 50px;
+        grid-template-columns: 50px [b] 150px [s] 1fr [e] 150px [z] 50px;
     }
     &__links-wrapper {
         grid-column: s/e;
@@ -40,6 +40,17 @@
             color: $light-gray;
         }
     }
+    &__title-wrapper{
+        grid-column: b/s;
+    }
+    &__name {
+        color: $gray;
+        font-weight: 600;
+        font-size: 2rem;
+        margin-top: 10px;
+        width: 500px;
+    }
+
 }
 
 .active {
@@ -51,8 +62,13 @@
 
 .logout {
     cursor: pointer;
+    grid-column: f/z;
 
     &__account-link {
         margin-right: 15px;
     }
+}
+
+.left {
+    margin-left: 99px;
 }

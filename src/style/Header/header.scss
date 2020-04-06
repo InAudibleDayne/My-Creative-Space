@@ -29,6 +29,11 @@
     }
     &__login-wrapper{
         grid-column: e/z;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
     }
     &__login {
         color: $gray;
@@ -63,6 +68,11 @@
 .logout {
     cursor: pointer;
     grid-column: f/z;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
 
     &__account-link {
         margin-right: 15px;
@@ -71,4 +81,8 @@
 
 .left {
     margin-left: 99px;
+}
+
+.top {
+    margin-top: 10px;
 }

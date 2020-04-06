@@ -31,7 +31,12 @@ export default class BlogDetail extends Component {
   getBlogItem() {
     //TODO write get function for backend
     this.setState({
-      blogItem: {id: 1, title: "Triumph - Tesla Taught Us How", description: "Laboris excepteur in id exercitation dolore. Adipisicing veniam sint ipsum aliquip et fugiat anim anim mollit. Quis exercitation proident do laborum dolore id aliquip tempor eu cillum est. Non ullamco officia ex excepteur aliqua dolor non. Eiusmod et adipisicing ex cillum ea consectetur aliqua. Deserunt ut reprehenderit dolore veniam et laboris elit laborum ullamco officia est Lorem. Est qui quis irure nisi excepteur in dolor Lorem veniam eu sunt. Laboris excepteur in id exercitation dolore. Adipisicing veniam sint ipsum aliquip et fugiat anim anim mollit. Quis exercitation proident do laborum dolore id aliquip tempor eu cillum est. Non ullamco officia ex excepteur aliqua dolor non. Eiusmod et adipisicing ex cillum ea consectetur aliqua. Deserunt ut reprehenderit dolore veniam et laboris elit laborum ullamco officia est Lorem. Est qui quis irure nisi excepteur in dolor Lorem veniam eu sunt.", blog_category: "books", file_location: "../../../assets/test_items/excerpts.pdf", upload_date: "2/1/2020"} 
+      blogItem: {id: 1, 
+        title: "Triumph - Tesla Taught Us How", 
+        description: "Laboris excepteur in id exercitation dolore. Adipisicing veniam sint ipsum aliquip et fugiat anim anim mollit. Quis exercitation proident do laborum dolore id aliquip tempor eu cillum est. Non ullamco officia ex excepteur aliqua dolor non. Eiusmod et adipisicing ex cillum ea consectetur aliqua. Deserunt ut reprehenderit dolore veniam et laboris elit laborum ullamco officia est Lorem. Est qui quis irure nisi excepteur in dolor Lorem veniam eu sunt. Laboris excepteur in id exercitation dolore. Adipisicing veniam sint ipsum aliquip et fugiat anim anim mollit. Quis exercitation proident do laborum dolore id aliquip tempor eu cillum est. Non ullamco officia ex excepteur aliqua dolor non. Eiusmod et adipisicing ex cillum ea consectetur aliqua. Deserunt ut reprehenderit dolore veniam et laboris elit laborum ullamco officia est Lorem. Est qui quis irure nisi excepteur in dolor Lorem veniam eu sunt.", 
+        blog_category: "videos", 
+        file_location: "https://www.youtube.com/watch?v=NXty07zLdrg", 
+        upload_date: "2/1/2020"} 
     })
   }
 

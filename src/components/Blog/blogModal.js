@@ -15,10 +15,12 @@ export default class BlogModal extends Component {
                 right: "auto",
                 marginRight: "-50%",
                 transform: "translate(-50%, -50%",
-                width: "800px"
+                width: "800px",
+                background: "rgb(13, 0, 25, 0.75)",
+                border: "1px solid rgb(212, 1, 141)"
             },
             overlay: {
-                backgroundColor: "rgba(1, 1, 1, 0.75)"
+                backgroundColor: "rgb(13, 0, 25, 0.75)"
             }
         }
 

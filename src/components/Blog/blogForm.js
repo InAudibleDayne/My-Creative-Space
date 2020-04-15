@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from "axios";
 import DropzoneComponent from "react-dropzone-component";
 
+import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
+import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
+
 import RichTextEditor from "../forms/rich-text-editor";
 
 export default class BlogForm extends Component {
@@ -11,10 +14,10 @@ export default class BlogForm extends Component {
         this.state = {
             id: "",
             title: "",
-            blog_status: "",
+            category: "",
             content: "",
             featured_image: "",
-            apiUrl: "https://daynebechtold.devcamp.space/portfolio/portfolio_blogs",
+            apiUrl: "localhost:5000/blog",
             apiAction: "post"
         };
 
@@ -37,7 +40,7 @@ export default class BlogForm extends Component {
                 title: this.props.blog.title,
                 blog_status: this.props.blog.blog_status,
                 content: this.props.blog.content,
-                apiUrl: `https://daynebechtold.devcamp.space/portfolio/portfolio_blogs/${this.props.blog.id}`,
+                apiUrl: `localhost:5000/blog/${this.props.blog.id}`,
                 apiAction: "patch"
             })
         }
@@ -73,12 +76,12 @@ export default class BlogForm extends Component {
     buildForm() {
         let formData = new FormData();
 
-        formData.append("portfolio_blog[title]", this.state.title);
-        formData.append("portfolio_blog[blog_status]", this.state.blog_status);
-        formData.append("portfolio_blog[content]", this.state.content);
+        formData.append("blog[title]", this.state.title);
+        formData.append("blog[category]", this.state.category);
+        formData.append("blog[content]", this.state.content);
 
         if (this.state.featured_image) {
-            formData.append("portfolio_blog[featured_image]", this.state.featured_image);
+            formData.append("blog[featured_image]", this.state.featured_image);
         }
 
         return formData;
@@ -87,7 +90,7 @@ export default class BlogForm extends Component {
     deleteImage(imageType) {
         axios
             .delete(
-                `https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${this.props.blog.id}?image_type=${imageType}`, 
+                `localhost:5000/blog/${this.props.blog.id}?image_type=${imageType}`, 
                 { withCredentials: true }
             )
             .then(response => {
@@ -146,13 +149,16 @@ export default class BlogForm extends Component {
             placeholder="Blog Title"
             value={this.state.title}
             />
-            <input 
-            onChange={this.handleChange} 
-            type="text"
-            name="blog_status"
-            placeholder="Blog Status"
-            value={this.state.blog_status}
-            />
+          <select className="select-element"
+            name="category"
+            value={this.state.category}
+            onChange={this.handleChange}
+          >
+            <option value="Music">Music</option>
+            <option value="Video">Video</option>
+            <option value="Book">Book</option>
+            <option value="Art">Art</option>
+          </select>
         </div>
 
         <div className="one-column">

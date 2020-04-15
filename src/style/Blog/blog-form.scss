@@ -59,9 +59,7 @@
 
     .btn {
         @include base-btn();
-
-        margin-top: 200px;
-        width: 80px;
+        width: 180px;
         height: 30px;
     }
 }

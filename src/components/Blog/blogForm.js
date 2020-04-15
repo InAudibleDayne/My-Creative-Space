@@ -17,7 +17,7 @@ export default class BlogForm extends Component {
             category: "",
             content: "",
             featured_image: "",
-            apiUrl: "localhost:5000/blog",
+            apiUrl: "http://localhost:5000/blog",
             apiAction: "post"
         };
 
@@ -40,7 +40,7 @@ export default class BlogForm extends Component {
                 title: this.props.blog.title,
                 blog_status: this.props.blog.blog_status,
                 content: this.props.blog.content,
-                apiUrl: `localhost:5000/blog/${this.props.blog.id}`,
+                apiUrl: `http://localhost:5000/blog/${this.props.blog.id}`,
                 apiAction: "patch"
             })
         }
@@ -90,7 +90,7 @@ export default class BlogForm extends Component {
     deleteImage(imageType) {
         axios
             .delete(
-                `localhost:5000/blog/${this.props.blog.id}?image_type=${imageType}`, 
+                `http://localhost:5000/blog/${this.props.blog.id}?image_type=${imageType}`, 
                 { withCredentials: true }
             )
             .then(response => {

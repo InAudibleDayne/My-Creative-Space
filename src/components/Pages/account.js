@@ -41,6 +41,13 @@ export default class AccountPage extends Component {
     })
   }
 
+  handleSuccessfulNewBlogSubmission(blog) {
+    this.setState({
+        blogModalIsOpen: false,
+        blogItems: [blog].concat(this.state.blogItems)
+    });
+  }
+
   render() {
     return (
         <div>

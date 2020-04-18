@@ -57,7 +57,6 @@ export default class App extends Component {
     <Route key='user-account' exact path='/user-account' render={props => (
       <AccountPage {...props} 
       loggedInStatus={this.state.loggedInStatus} 
-      loggedInId={this.state.userId} 
       firstName={this.state.firstName} 
       handleSuccessfulLogout={this.handleSuccessfulLogout}
       userId={this.state.userId}/>

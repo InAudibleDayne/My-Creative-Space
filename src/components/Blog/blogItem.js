@@ -41,21 +41,21 @@ export default class BlogItem extends Component {
     nextPage = () => this.changePage(1);
 
     tagCreator() {
-        if (this.state.blog_category === "music") {
+        if (this.state.blog_category === "MUSIC") {
             return <AudioPlayer
                 src={`${this.state.file_location}`}
                 onPlay={e => console.log("onPlay")}
                 showVolumeControl={true}
                 />
-        } else if (this.state.blog_category === "videos") {
+        } else if (this.state.blog_category === "VIDEO") {
             return <ReactPlayer 
                 url={`${this.state.file_location}`}
                 playing={false}
                 controls={true}
                 />
-        } else if (this.state.blog_category === "art") {
+        } else if (this.state.blog_category === "ART") {
             return <img src={this.state.file_location}/> 
-        } else if (this.state.blog_category === "books" ) {
+        } else if (this.state.blog_category === "BOOK" ) {
             const { pageNumber, numPages } = this.state;
 
             return (

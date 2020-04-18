@@ -41,6 +41,7 @@ export default class BlogModal extends Component {
             }} 
             isOpen={this.props.modalIsOpen}>
                 <BlogForm 
+                userId={this.props.userId}
                 handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
                 />
             </ReactModal>

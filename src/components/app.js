@@ -86,7 +86,11 @@ export default class App extends Component {
                 )} 
                 />
           <Route exact path='/b/:slug' render={props => (
-            <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} handleSuccessfulLogout={this.handleSuccessfulLogout} firstName={this.state.firstName} />
+            <BlogDetail {...props} 
+            loggedInStatus={this.state.loggedInStatus} 
+            handleSuccessfulLogout={this.handleSuccessfulLogout} 
+            firstName={this.state.firstName}
+            />
           )} />
           {this.state.loggedInStatus === "LOGGED_IN" ? (this.authorizedPages()) : null}
           <Route component={NoMatch}/>

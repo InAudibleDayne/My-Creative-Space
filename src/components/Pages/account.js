@@ -36,7 +36,7 @@ export default class AccountPage extends Component {
     })
     var offset = (this.state.currentPage * 10)
     axios
-        .get(`http://localhost:5000/blogs/${offset}`
+        .get(`http://localhost:5000/blogs/user/${this.props.userId}/${offset}`
         ).then(response => {
             console.log(response)
             this.setState({

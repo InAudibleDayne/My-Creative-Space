@@ -31,7 +31,8 @@ export default class BlogForm extends Component {
         this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
         this.deleteImage = this.deleteImage.bind(this);
         this.imageUploader = this.imageUploader.bind(this);
-        this.buildForm = this.buildForm.bind(this)
+        this.buildForm = this.buildForm.bind(this);
+        this.getBase64 = this.getBase64.bind(this);
 
         this.featuredImageRef = React.createRef();
     }
@@ -67,10 +68,19 @@ export default class BlogForm extends Component {
 
     handleFeaturedImageDrop() {
         return {
-            addedfile: file => this.setState({
-                featured_image: file
-            })
+            addedfile: file => {
+                this.getBase64(file);
+            }
         }
+    }
+
+    getBase64(file) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => this.setState({
+            featured_image: reader.result
+        });
+        reader.onerror = error => {};
     }
 
     handleRichTextEditorChange(content) {
@@ -78,29 +88,43 @@ export default class BlogForm extends Component {
     }
 
     buildForm() {
-        let formData = new FormData();
+        // let formData = new FormData();
 
-        formData.append("Blogs[title]", this.state.title);
-        formData.append("Blogs[description]", this.state.content);
-        formData.append("Blogs[blog_type]", this.state.blog_type);
+        // formData.append("title", this.state.title);
+        // formData.append("description", this.state.content);
+        // formData.append("blog_type", this.state.blog_type);
 
-        if(this.state.file_location) {
-            formData.append("Blogs[file_location]", this.state.file_location);
+        // if(this.state.file_location) {
+        //     formData.append("file_location", this.state.file_location);
+        // } else {
+        //     formData.append("file_location", "null")
+        // }
+        // if (this.state.featured_image) {
+        //     formData.append("file_blob", this.state.featured_image);
+        // } else {
+        //     formData.append("file_blob", "null")
+        // }
+
+        // formData.append("created_by_id", this.props.userId);
+
+        // return formData;
+
+        let myJSONRequest = {
+            "title": this.state.title,
+            "description": this.state.content,
+            "blog_type": this.state.blog_type,
+            "file_location": this.state.file_location,
+            "file_blob": this.state.featured_image,
+            "created_by": this.props.userId
         }
-        if (this.state.featured_image) {
-            formData.append("Blogs[file_blob]", this.state.featured_image);
-        }
 
-        formData.append("Blogs[created_by_id]", this.props.userId);
-
-        return formData;
+        return myJSONRequest;
     }
 
     deleteImage(imageType) {
         axios
             .delete(
-                `http://localhost:5000/blog/${this.props.blog.id}?image_type=${imageType}`, 
-                { withCredentials: true }
+                `http://localhost:5000/blog/${this.props.blog.id}?image_type=${imageType}`
             )
             .then(response => {
                 this.props.handleFeaturedImageDelete();
@@ -117,15 +141,13 @@ export default class BlogForm extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.buildForm())
         axios({
             method: this.state.apiAction,
             url: this.state.apiUrl,
-            data: this.buildForm(),
-            withCredentials: true
+            data: this.buildForm()
           })
           .then(response => {
-              console.log(response.json)
+              console.log("response from server", response.data)
                 if (this.state.featured_image) {
                     this.featuredImageRef.current.dropzone.removeAllFiles();
                 };
@@ -140,9 +162,9 @@ export default class BlogForm extends Component {
                 });
 
                 if (this.props.editMode) {
-                    this.props.handleUpdateFormSubmission(response.data.Blogs);
+                    this.props.handleUpdateFormSubmission(response.data);
                 } else {
-                    this.props.handleSuccessfulFormSubmission(response.data.Blogs);
+                    this.props.handleSuccessfulFormSubmission(response.data);
                 }
             }).catch(error => {
                 console.log("handleSubmit for blog error", error);

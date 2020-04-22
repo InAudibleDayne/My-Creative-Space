@@ -22,6 +22,8 @@ export default class AccountPage extends Component {
       this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
       this.handleModalClose = this.handleModalClose.bind(this)
       this.getBlogItems = this.getBlogItems.bind(this)
+      this.handleSuccessfulNewBlogSubmission = this.handleSuccessfulNewBlogSubmission.bind(this)
+      this.handleDeleteClick = this.handleDeleteClick.bind(this)
   }
 
   componentWillMount() {
@@ -71,11 +73,30 @@ export default class AccountPage extends Component {
     })
   }
 
+  handleDeleteClick(blog) {
+    axios.delete(
+      `http://localhost:5000/blog/${blog.id}`
+      ).then(response => {
+          this.setState({
+              blogItems: this.state.blogItems.filter(blogItem => {
+                  return blog.id !== blogItem.id;
+              })
+          });
+
+          return response.data;
+      }).catch(error => {
+          console.log("Error from Blog delete", error);
+      });
+  }
+
   handleSuccessfulNewBlogSubmission(blog) {
+    console.log("test", blog)
+    console.log("current blogs", this.state.blogItems)
     this.setState({
         blogModalIsOpen: false,
         blogItems: [blog].concat(this.state.blogItems)
     });
+    console.log("current blogs 2", this.state.blogItems)
   }
 
   render() {
@@ -109,7 +130,6 @@ export default class AccountPage extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <h1>Something to read</h1>
             <div className="new-blog-link">
               <a onClick={this.handleNewBlogClick}>
                   <FontAwesomeIcon icon="plus-circle" />

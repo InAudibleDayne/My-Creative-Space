@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
+import striptags from "striptags";
 import Truncate from "react-truncate";
 import AudioPlayer from 'react-h5-audio-player';
 import ReactPlayer from 'react-player';
@@ -11,10 +12,10 @@ export default class BlogItem extends Component {
 
         this.state = {
             id: this.props.blogItem.id,
-            blog_category: this.props.blogItem.blog_category,
+            blog_type: this.props.blogItem.blog_type,
             description: this.props.blogItem.description,
             title: this.props.blogItem.title,
-            file_location: this.props.blogItem.file_location,
+            file_location: this.props.blogItem.file_blob,
 
             numPages: null,
             pageNumber: 1
@@ -41,21 +42,21 @@ export default class BlogItem extends Component {
     nextPage = () => this.changePage(1);
 
     tagCreator() {
-        if (this.state.blog_category === "MUSIC") {
+        if (this.state.blog_type === "MUSIC") {
             return <AudioPlayer
                 src={`${this.state.file_location}`}
                 onPlay={e => console.log("onPlay")}
                 showVolumeControl={true}
                 />
-        } else if (this.state.blog_category === "VIDEO") {
+        } else if (this.state.blog_type === "VIDEO") {
             return <ReactPlayer 
                 url={`${this.state.file_location}`}
                 playing={false}
                 controls={true}
                 />
-        } else if (this.state.blog_category === "ART") {
+        } else if (this.state.blog_type === "ART") {
             return <img src={this.state.file_location}/> 
-        } else if (this.state.blog_category === "BOOK" ) {
+        } else if (this.state.blog_type === "BOOK" ) {
             const { pageNumber, numPages } = this.state;
 
             return (
@@ -97,7 +98,7 @@ export default class BlogItem extends Component {
 
     render() {
         return (
-            <div className={`blog-item-wrapper ${this.state.blog_category}`}>
+            <div className={`blog-item-wrapper ${this.state.blog_type}`}>
                 <div className='left-side'>
                     <Link to={`/b/${this.state.id}`}>
                         <h1>{this.state.title}</h1>
@@ -114,7 +115,7 @@ export default class BlogItem extends Component {
                         ... <Link to={`/b/${this.state.id}`}>Read More</Link>
                         </span>
                     }>
-                        {this.state.description}
+                        {striptags(this.state.description)}
                     </Truncate>
                 </div>
             </div>

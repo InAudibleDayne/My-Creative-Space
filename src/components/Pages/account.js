@@ -24,6 +24,8 @@ export default class AccountPage extends Component {
       this.getBlogItems = this.getBlogItems.bind(this)
       this.handleSuccessfulNewBlogSubmission = this.handleSuccessfulNewBlogSubmission.bind(this)
       this.handleDeleteClick = this.handleDeleteClick.bind(this)
+      this.getSortedBlogItems = this.getSortedBlogItems.bind(this)
+      this.sortDecider = this.sortDecider.bind(this)
   }
 
   componentWillMount() {
@@ -31,16 +33,13 @@ export default class AccountPage extends Component {
   }
 
   getBlogItems() {
-    this.setState({
-        currentPage: this.state.currentPage + 1
-    })
     var offset = (this.state.currentPage * 10)
     axios
         .get(`http://localhost:5000/blogs/user/${this.props.userId}/${offset}`
         ).then(response => {
             console.log(response)
             this.setState({
-                blogItems: this.state.blogItems.concat(response.data),
+                blogItems: response.data,
                 totalCount: response.data.length,
                 isLoading: false
             });
@@ -48,7 +47,32 @@ export default class AccountPage extends Component {
     }).catch(error => {
         console.log("getBlogItems error", error);
     });
-}
+  }
+
+  getSortedBlogItems(activeFilter) {
+    var offset = (this.state.currentPage * 10)
+    axios
+        .get(`http://localhost:5000/blogs/user/${this.props.userId}/${activeFilter}/${offset}`
+        ).then(response => {
+            console.log(response)
+            this.setState({
+                blogItems: response.data,
+                totalCount: response.data.length,
+                isLoading: false
+            });
+            console.log(response.data);
+    }).catch(error => {
+        console.log("getBlogItems error", error);
+    });
+  }
+
+  sortDecider(activeFilter) {
+    if(activeFilter === 'all'){
+      this.getBlogItems()
+    }else{
+      this.getSortedBlogItems(activeFilter);
+    }
+  }
 
   handleChange = (event) => {
       this.setState({
@@ -120,7 +144,13 @@ export default class AccountPage extends Component {
             handleModalClose={this.handleModalClose}
             userId={this.props.userId}
             />
-            <Header currentPage='ACCOUNT' firstName={this.props.firstName} loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout}/>
+            <Header 
+            currentPage='ACCOUNT' 
+            firstName={this.props.firstName} 
+            loggedInStatus={this.props.loggedInStatus} 
+            filters={this.sortDecider}
+            handleLogout={this.handleLogout}
+            />
             <div className="search-wrapper">
               <input 
                 name="search"

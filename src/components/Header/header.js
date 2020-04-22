@@ -56,16 +56,16 @@ export default class Header extends Component {
                     <div id='all' className={`header__links ${this.state.active === 'all' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         All
                     </div>
-                    <div id='music' className={`header__links ${this.state.active === 'music' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='MUSIC' className={`header__links ${this.state.active === 'MUSIC' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         Music
                     </div>
-                    <div id='videos' className={`header__links ${this.state.active === 'videos' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='VIDEO' className={`header__links ${this.state.active === 'VIDEO' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         Videos
                     </div>
-                    <div id='books' className={`header__links ${this.state.active === 'books' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='BOOK' className={`header__links ${this.state.active === 'BOOK' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         Books
                     </div>
-                    <div id='art' className={`header__links ${this.state.active === 'art' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='ART' className={`header__links ${this.state.active === 'ART' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         Art
                     </div>
                 </div>
@@ -117,16 +117,16 @@ export default class Header extends Component {
                     <div id='all' className={`header__links ${this.state.active === 'all' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         All
                     </div>
-                    <div id='music' className={`header__links ${this.state.active === 'music' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='MUSIC' className={`header__links ${this.state.active === 'MUSIC' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         My Music
                     </div>
-                    <div id='videos' className={`header__links ${this.state.active === 'videos' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='VIDEO' className={`header__links ${this.state.active === 'VIDEO' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         My Videos
                     </div>
-                    <div id='books' className={`header__links ${this.state.active === 'books' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='BOOK' className={`header__links ${this.state.active === 'BOOK' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         My Books
                     </div>
-                    <div id='art' className={`header__links ${this.state.active === 'art' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
+                    <div id='ART' className={`header__links ${this.state.active === 'ART' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
                         My Art
                     </div>
                 </div>

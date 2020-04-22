@@ -27,27 +27,54 @@ export default class BlogContainer extends Component {
   }
 
   getBlogItems() {
-    this.setState({
-      currentPage: this.state.currentPage + 1
-  })
-  var offset = (this.state.currentPage * 10)
-  axios
-      .get(`http://localhost:5000/blogs/${offset}`
-      ).then(response => {
-          console.log(response)
-          this.setState({
-              blogItems: this.state.blogItems.concat(response.data),
-              totalCount: response.data.length,
-              isLoading: false
-          });
-          console.log(response.data);
-  }).catch(error => {
-      console.log("getBlogItems error", error);
-  });
+    var offset = (this.state.currentPage * 10)
+    axios
+        .get(`http://localhost:5000/blogs/${offset}`
+        ).then(response => {
+            console.log(response)
+            this.setState({
+                blogItems: this.state.blogItems.concat(response.data),
+                totalCount: response.data.length,
+                isLoading: false
+            });
+            console.log(response.data);
+    }).catch(error => {
+        console.log("getBlogItems error", error);
+    });
   }
 
   filterResults = (activeFilter) => {
-    //TO DO write query to pull blogs with filter
+    if(activeFilter === 'all') {
+      var offset = (this.state.currentPage * 10)
+      axios
+          .get(`http://localhost:5000/blogs/${offset}`
+          ).then(response => {
+              console.log(response)
+              this.setState({
+                  blogItems: response.data,
+                  totalCount: response.data.length,
+                  isLoading: false
+              });
+              console.log(response.data);
+      }).catch(error => {
+          console.log("getBlogItems error", error);
+      });
+    } else {
+      var offset = (this.state.currentPage * 10)
+      axios
+          .get(`http://localhost:5000/blogs/sort/${activeFilter}/${offset}`
+          ).then(response => {
+              console.log(response)
+              this.setState({
+                  blogItems: response.data,
+                  totalCount: response.data.length,
+                  isLoading: false
+              });
+              console.log(response.data);
+      }).catch(error => {
+          console.log("getBlogItems error", error);
+      });
+    }
   }
 
   handleChange = (event) => {
@@ -66,7 +93,14 @@ export default class BlogContainer extends Component {
     })
     return (
         <div>
-            <Header currentPage='HOME' filters={this.filterResults} loggedInStatus={this.props.loggedInStatus} handleLogout={this.handleLogout} firstName={this.props.firstName} userId={this.props.userId} />
+            <Header 
+              currentPage='HOME' 
+              filters={this.filterResults} 
+              loggedInStatus={this.props.loggedInStatus} 
+              handleLogout={this.handleLogout} 
+              firstName={this.props.firstName} 
+              userId={this.props.userId} 
+            />
             <div className="search-wrapper">
               <input 
                 name="search"

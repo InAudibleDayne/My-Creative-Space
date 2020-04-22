@@ -15,7 +15,7 @@ export default class BlogForm extends Component {
         this.state = {
             id: "",
             title: "",
-            blog_type: "",
+            blog_type: "MUSIC",
             content: "",
             featured_image: "",
             file_location: "",
@@ -33,6 +33,7 @@ export default class BlogForm extends Component {
         this.imageUploader = this.imageUploader.bind(this);
         this.buildForm = this.buildForm.bind(this);
         this.getBase64 = this.getBase64.bind(this);
+        this.featuredText = this.featuredText.bind(this);
 
         this.featuredImageRef = React.createRef();
     }
@@ -53,8 +54,8 @@ export default class BlogForm extends Component {
 
     componentConfig() {
         return {
-            iconFiletypes: [".jpg", ".png"],
-            showFiletypeIcon: true,
+            iconFiletypes: [".png"],
+            showFiletypeIcon: false,
             postUrl: "https://httpbin.org/post"
         }
     }
@@ -173,7 +174,7 @@ export default class BlogForm extends Component {
     }
 
     imageUploader() {
-        if(this.state.blog_type === "ART") {
+        if(this.state.blog_type !== "VIDEO" ) {
             return <div className="image-uploaders">
                 {this.props.editMode && this.props.blog.featured_image_url ? (            <div className="portfolio-manager-image-wrapper">
                 <img src={this.props.blog.featured_image_url}/>
@@ -190,7 +191,7 @@ export default class BlogForm extends Component {
                 djsConfig={this.djsConfig()}
                 eventHandlers={this.handleFeaturedImageDrop()}
                 >
-                    <div className="dz-message">Featured Image</div>
+                    <div className="dz-message">{this.featuredText()}</div>
                 </DropzoneComponent>
                 )}
                 <div className='or'>OR</div>
@@ -199,6 +200,16 @@ export default class BlogForm extends Component {
             return null
         }
     }
+
+    featuredText() {
+        if(this.state.blog_type === "ART") {
+            return "Your Image.jpg or .png"
+        } else if(this.state.blog_type === "MUSIC") {
+            return "Your Song.mp3"
+        } else if(this.state.blog_type === "BOOK") {
+            return "Your Book.pdf"
+        }
+      };
 
   render() {
     return (

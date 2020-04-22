@@ -15,7 +15,8 @@ export default class BlogItem extends Component {
             blog_type: this.props.blogItem.blog_type,
             description: this.props.blogItem.description,
             title: this.props.blogItem.title,
-            file_location: this.props.blogItem.file_blob,
+            file_blob: this.props.blogItem.file_blob,
+            file_location: this.props.blogItem.file_location,
 
             numPages: null,
             pageNumber: 1
@@ -44,25 +45,25 @@ export default class BlogItem extends Component {
     tagCreator() {
         if (this.state.blog_type === "MUSIC") {
             return <AudioPlayer
-                src={`${this.state.file_location}`}
+                src={`${this.state.file_location ? this.state.file_location : this.state.file_blob}`}
                 onPlay={e => console.log("onPlay")}
                 showVolumeControl={true}
                 />
         } else if (this.state.blog_type === "VIDEO") {
             return <ReactPlayer 
-                url={`${this.state.file_location}`}
+                url={`${this.state.file_location ? this.state.file_location : this.state.file_blob}`}
                 playing={false}
                 controls={true}
                 />
         } else if (this.state.blog_type === "ART") {
-            return <img src={this.state.file_location}/> 
+            return <img src={this.state.file_location ? this.state.file_location : this.state.file_blob}/> 
         } else if (this.state.blog_type === "BOOK" ) {
             const { pageNumber, numPages } = this.state;
 
             return (
             <React.Fragment>
                 <Document
-                file={this.state.file_location}
+                file={this.state.file_location ? this.state.file_location : this.state.file_blob}
                 onLoadSuccess={this.onDocumentLoadSuccess}
                 className="pdf"
                 >

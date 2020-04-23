@@ -14,7 +14,8 @@ export default class AccountPage extends Component {
         blogModalIsOpen: false,
         blogItems: [],
         currentPage: 0,
-        totalCount: 0
+        totalCount: 0,
+        stopQuery: false
       }
 
       this.handleChange = this.handleChange.bind(this)
@@ -24,53 +25,117 @@ export default class AccountPage extends Component {
       this.getBlogItems = this.getBlogItems.bind(this)
       this.handleSuccessfulNewBlogSubmission = this.handleSuccessfulNewBlogSubmission.bind(this)
       this.handleDeleteClick = this.handleDeleteClick.bind(this)
-      this.getSortedBlogItems = this.getSortedBlogItems.bind(this)
-      this.sortDecider = this.sortDecider.bind(this)
+      this.filterResults = this.filterResults.bind(this)
+      this.onScroll = this.onScroll.bind(this)
+      window.addEventListener("scroll", this.onScroll, false);
   }
 
   componentWillMount() {
-    this.getBlogItems()
+    this.getBlogItems(0)
   }
 
-  getBlogItems() {
-    var offset = (this.state.currentPage * 10)
-    axios
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+
+  getBlogItems(offset, filter = null) {
+    if(filter){
+      axios
+          .get(`http://localhost:5000/blogs/user/${this.props.userId}/${filter}/${offset}`
+          ).then(response => {
+            if(this.state.totalCount === 0){
+              this.setState({
+                blogItems: response.data,
+                totalCount: offset + response.data.length,
+                isLoading: false
+            });
+            } else {
+              if(response.data.length < 10){
+                this.setState({
+                  blogItems: this.state.blogItems.concat(response.data),
+                  totalCount: 0,
+                  isLoading: false,
+                  currentPage: 0,
+                  stopQuery: true
+              });
+              } else {
+                this.setState({
+                    blogItems: this.state.blogItems.concat(response.data),
+                    totalCount: offset + response.data.length,
+                    isLoading: false
+                });
+              }
+            }
+      }).catch(error => {
+          console.log("getBlogItems error", error);
+      });
+    } else {
+      axios
         .get(`http://localhost:5000/blogs/user/${this.props.userId}/${offset}`
         ).then(response => {
-            console.log(response)
+          if(this.state.totalCount === 0){
             this.setState({
-                blogItems: response.data,
-                totalCount: response.data.length,
-                isLoading: false
+              blogItems: response.data,
+              totalCount: offset + response.data.length,
+              isLoading: false
+          });
+          } else {
+            if(response.data.length < 10){
+              this.setState({
+                blogItems: this.state.blogItems.concat(response.data),
+                totalCount: 0,
+                isLoading: false,
+                currentPage: 0,
+                stopQuery: true
             });
-            console.log(response.data);
-    }).catch(error => {
-        console.log("getBlogItems error", error);
-    });
+            } else {
+              this.setState({
+                  blogItems: this.state.blogItems.concat(response.data),
+                  totalCount: offset + response.data.length,
+                  isLoading: false
+              });
+            }
+          }
+        }).catch(error => {
+          console.log("getBlogItems error", error);
+        });
+    }
   }
 
-  getSortedBlogItems(activeFilter) {
-    var offset = (this.state.currentPage * 10)
-    axios
-        .get(`http://localhost:5000/blogs/user/${this.props.userId}/${activeFilter}/${offset}`
-        ).then(response => {
-            console.log(response)
-            this.setState({
-                blogItems: response.data,
-                totalCount: response.data.length,
-                isLoading: false
-            });
-            console.log(response.data);
-    }).catch(error => {
-        console.log("getBlogItems error", error);
-    });
+  filterResults = (activeFilter) => {
+    this.setState({
+      stopQuery: false,
+      totalCount: 0
+    })
+    if(activeFilter === 'all') {
+      this.setState({
+        filter: null
+      })
+      this.getBlogItems(0)
+    } else {
+      this.setState({
+        filter: activeFilter
+      })
+      this.getBlogItems(0, activeFilter)
+    }
   }
 
-  sortDecider(activeFilter) {
-    if(activeFilter === 'all'){
-      this.getBlogItems()
-    }else{
-      this.getSortedBlogItems(activeFilter);
+  onScroll() {
+    if (
+        this.state.isLoading
+    ) {
+        return;
+    }
+
+    if (this.state.stopQuery) { 
+      return; 
+    }
+
+    if ((window.innerHeight + document.documentElement.scrollTop) === document.body.scrollHeight) {
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      })
+      this.getBlogItems(this.state.totalCount, this.state.filter);
     }
   }
 
@@ -114,13 +179,10 @@ export default class AccountPage extends Component {
   }
 
   handleSuccessfulNewBlogSubmission(blog) {
-    console.log("test", blog)
-    console.log("current blogs", this.state.blogItems)
     this.setState({
         blogModalIsOpen: false,
         blogItems: [blog].concat(this.state.blogItems)
     });
-    console.log("current blogs 2", this.state.blogItems)
   }
 
   render() {
@@ -148,14 +210,14 @@ export default class AccountPage extends Component {
             currentPage='ACCOUNT' 
             firstName={this.props.firstName} 
             loggedInStatus={this.props.loggedInStatus} 
-            filters={this.sortDecider}
+            filters={this.filterResults}
             handleLogout={this.handleLogout}
             />
             <div className="search-wrapper">
               <input 
                 name="search"
                 type='text'
-                placeholder="Search"
+                placeholder="Search my blogs"
                 value={this.state.search}
                 onChange={this.handleChange}
               />

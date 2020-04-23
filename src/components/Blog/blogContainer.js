@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from '../Header/header';
 import BlogItem from './blogItem';
 import axios from 'axios';
 
 
 
-export default class BlogContainer extends Component {
+class BlogContainer extends Component {
   constructor(props) {
     super(props) 
 
@@ -13,67 +14,126 @@ export default class BlogContainer extends Component {
       blogItems: [],
       search: '',
       currentPage: 0,
-      totalCount: 0
+      totalCount: 0,
+      isLoading: true,
+      filter: null,
+      stopQuery: false
     }
     
     this.handleChange = this.handleChange.bind(this);
     this.filterResults = this.filterResults.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.getBlogItems = this.getBlogItems.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    window.addEventListener("scroll", this.onScroll, false);
   }
 
   componentWillMount() {
-    this.getBlogItems();
+    this.getBlogItems(0);
   }
 
-  getBlogItems() {
-    var offset = (this.state.currentPage * 10)
-    axios
-        .get(`http://localhost:5000/blogs/${offset}`
-        ).then(response => {
-            console.log(response)
-            this.setState({
-                blogItems: this.state.blogItems.concat(response.data),
-                totalCount: response.data.length,
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+
+  getBlogItems(offset, filter = null) {
+    if(filter){
+      axios
+          .get(`http://localhost:5000/blogs/sort/${filter}/${offset}`
+          ).then(response => {
+            if(this.state.totalCount === 0){
+              this.setState({
+                blogItems: response.data,
+                totalCount: offset + response.data.length,
                 isLoading: false
             });
-            console.log(response.data);
-    }).catch(error => {
-        console.log("getBlogItems error", error);
-    });
-  }
-
-  filterResults = (activeFilter) => {
-    if(activeFilter === 'all') {
-      var offset = (this.state.currentPage * 10)
-      axios
-          .get(`http://localhost:5000/blogs/${offset}`
-          ).then(response => {
-              console.log(response)
-              this.setState({
-                  blogItems: response.data,
-                  totalCount: response.data.length,
-                  isLoading: false
+            } else {
+              if(response.data.length < 10){
+                this.setState({
+                  blogItems: this.state.blogItems.concat(response.data),
+                  totalCount: 0,
+                  isLoading: false,
+                  currentPage: 0,
+                  stopQuery: true
               });
-              console.log(response.data);
+              } else {
+                this.setState({
+                    blogItems: this.state.blogItems.concat(response.data),
+                    totalCount: offset + response.data.length,
+                    isLoading: false
+                });
+              }
+            }
       }).catch(error => {
           console.log("getBlogItems error", error);
       });
     } else {
-      var offset = (this.state.currentPage * 10)
       axios
-          .get(`http://localhost:5000/blogs/sort/${activeFilter}/${offset}`
-          ).then(response => {
-              console.log(response)
+        .get(`http://localhost:5000/blogs/${offset}`
+        ).then(response => {
+          if(this.state.totalCount === 0){
+            this.setState({
+              blogItems: response.data,
+              totalCount: offset + response.data.length,
+              isLoading: false
+          });
+          } else {
+            if(response.data.length < 10){
               this.setState({
-                  blogItems: response.data,
-                  totalCount: response.data.length,
+                blogItems: this.state.blogItems.concat(response.data),
+                totalCount: 0,
+                isLoading: false,
+                currentPage: 0,
+                stopQuery: true
+            });
+            } else {
+              this.setState({
+                  blogItems: this.state.blogItems.concat(response.data),
+                  totalCount: offset + response.data.length,
                   isLoading: false
               });
-              console.log(response.data);
-      }).catch(error => {
+            }
+          }
+        }).catch(error => {
           console.log("getBlogItems error", error);
-      });
+        });
+    }
+  }
+
+  filterResults = (activeFilter) => {
+    this.setState({
+      stopQuery: false,
+      totalCount: 0
+    })
+    if(activeFilter === 'all') {
+      this.setState({
+        filter: null
+      })
+      this.getBlogItems(0)
+    } else {
+      this.setState({
+        filter: activeFilter
+      })
+      this.getBlogItems(0, activeFilter)
+    }
+  }
+
+  onScroll() {
+    if (
+        this.state.isLoading
+    ) {
+        return;
+    }
+
+    if (this.state.stopQuery) { 
+      return; 
+    }
+
+    if ((window.innerHeight + document.documentElement.scrollTop) === document.body.scrollHeight) {
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      })
+      this.getBlogItems(this.state.totalCount, this.state.filter);
     }
   }
 
@@ -115,8 +175,13 @@ export default class BlogContainer extends Component {
                     {blogRecords}
                 </div>
             </div>
+            {this.state.isLoading ? (
+            <div className="content-loader">
+              <FontAwesomeIcon icon="spinner" spin />
+            </div>) : null}
         </div>
     );
   }
 }
 
+export default BlogContainer;

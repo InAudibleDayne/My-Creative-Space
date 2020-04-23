@@ -36,7 +36,6 @@ export default class App extends Component {
       firstName: `${firstName}`,
       userId: `${userId}`
     })
-    console.log(this.state.userId);
   }
 
   handleUnsuccessfulLogin() {

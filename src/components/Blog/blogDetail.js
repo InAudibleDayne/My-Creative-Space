@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import Header from '../Header/header';
 
+import { Document, Page } from 'react-pdf';
+import axios from 'axios';
+import ReactHtmlParser from 'react-html-parser';
+
 import AudioPlayer from 'react-h5-audio-player';
 import ReactPlayer from 'react-player';
-import { Document, Page } from 'react-pdf';
+
 
 export default class BlogDetail extends Component {
   constructor(props) {
@@ -11,6 +15,7 @@ export default class BlogDetail extends Component {
 
     this.state = {
       blogItem: {},
+      currentId: this.props.match.params.slug,
 
       numPages: null,
       pageNumber: 1
@@ -25,19 +30,21 @@ export default class BlogDetail extends Component {
   }
 
   componentWillMount() {
+    console.log(this.state.currentId)
     this.getBlogItem();
   }
 
   getBlogItem() {
     //TODO write get function for backend
-    this.setState({
-      blogItem: {id: 1, 
-        title: "Triumph - Tesla Taught Us How", 
-        description: "Laboris excepteur in id exercitation dolore. Adipisicing veniam sint ipsum aliquip et fugiat anim anim mollit. Quis exercitation proident do laborum dolore id aliquip tempor eu cillum est. Non ullamco officia ex excepteur aliqua dolor non. Eiusmod et adipisicing ex cillum ea consectetur aliqua. Deserunt ut reprehenderit dolore veniam et laboris elit laborum ullamco officia est Lorem. Est qui quis irure nisi excepteur in dolor Lorem veniam eu sunt. Laboris excepteur in id exercitation dolore. Adipisicing veniam sint ipsum aliquip et fugiat anim anim mollit. Quis exercitation proident do laborum dolore id aliquip tempor eu cillum est. Non ullamco officia ex excepteur aliqua dolor non. Eiusmod et adipisicing ex cillum ea consectetur aliqua. Deserunt ut reprehenderit dolore veniam et laboris elit laborum ullamco officia est Lorem. Est qui quis irure nisi excepteur in dolor Lorem veniam eu sunt.", 
-        blog_category: "videos", 
-        file_location: "https://www.youtube.com/watch?v=NXty07zLdrg", 
-        upload_date: "2/1/2020"} 
-    })
+    axios.get(`http://localhost:5000/blog/${this.state.currentId}`
+    ).then(response => {
+        console.log(response.data)
+        this.setState({
+            blogItem: response.data
+        })
+    }).catch(error=> {
+        console.log("getBlogItem error", error);
+    });
   }
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -53,28 +60,28 @@ export default class BlogDetail extends Component {
 
   nextPage = () => this.changePage(1);
 
-  tagCreator() {
-    if (this.state.blogItem.blog_category === "music") {
+  tagCreator(file_location, file_blob, blog_type) {
+    if (blog_type === "MUSIC") {
         return <AudioPlayer
-            src={`${this.state.blogItem.file_location}`}
+            src={`${file_location ? file_location : file_blob}`}
             onPlay={e => console.log("onPlay")}
             showVolumeControl={true}
             />
-    } else if (this.state.blogItem.blog_category === "videos") {
+    } else if (blog_type === "VIDEO") {
         return <ReactPlayer 
-            url={`${this.state.blogItem.file_location}`}
+            url={`${file_location}`}
             playing={false}
             controls={true}
             />
-    } else if (this.state.blogItem.blog_category === "art") {
-        return <img src={this.state.blogItem.file_location}/> 
-    } else if (this.state.blogItem.blog_category === "books" ) {
+    } else if (blog_type === "ART") {
+        return <img src={file_location ? file_location : file_blob}/> 
+    } else if (blog_type === "BOOK" ) {
         const { pageNumber, numPages } = this.state;
 
         return (
         <div className='blog-detail-pdf-wrapper'>
           <Document
-          file={this.state.blogItem.file_location}
+          file={file_location ? file_location : file_blob}
           onLoadSuccess={this.onDocumentLoadSuccess}
           className="blog-detail-pdf"
           >
@@ -112,7 +119,10 @@ export default class BlogDetail extends Component {
     const {
       title,
       description,
-      upload_date
+      blog_type,
+      created_by_id,
+      file_blob,
+      file_location
     } = this.state.blogItem;
 
     return (
@@ -122,14 +132,11 @@ export default class BlogDetail extends Component {
             <div className='blog-detail__title'>
               {title}
             </div>
-            <div className='blog-detail__date'>
-              {upload_date}
-            </div>
             <div className='blog-detail__media'>
-              {this.tagCreator()}
+              {this.tagCreator(file_location, file_blob, blog_type)}
             </div>
             <div className='blog-detail__description'>
-              {description}
+              {ReactHtmlParser(description)}
             </div>
           </div>
         </div>

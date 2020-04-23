@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
-import striptags from "striptags";
 import Truncate from "react-truncate";
 import AudioPlayer from 'react-h5-audio-player';
 import ReactPlayer from 'react-player';
 import { Document, Page } from 'react-pdf';
+import ReactHtmlParser from 'react-html-parser';
 
 export default class BlogItem extends Component {
     constructor(props) {
@@ -116,7 +116,7 @@ export default class BlogItem extends Component {
                         ... <Link to={`/b/${this.state.id}`}>Read More</Link>
                         </span>
                     }>
-                        {striptags(this.state.description)}
+                        {ReactHtmlParser(this.state.description)}
                     </Truncate>
                 </div>
             </div>

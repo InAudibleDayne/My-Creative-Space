@@ -17,13 +17,39 @@
         
         .google-login {
             margin-top: 100px;
+            margin-bottom: 15px;
             h2 {
                 color: $magenta;
             }
             &__btn {
-                width: 200px;
+                width: 250px;
                 color: $magenta !important;
                 font-weight: 900 !important;
+                font-size: 1rem;
+            }
+        }
+
+        .facebook-login {
+            margin-top: 15px;
+            h2 {
+                color: $magenta;
+            }
+            &__btn {
+                width: 250px;
+                color: $light-gray;
+                background-color: #4267B2;
+                font-weight: 900 !important;
+                font-size: 1.5rem;
+                border: none;
+                border-radius: 0px;
+            }
+            &__logo {
+                height: 30px;
+                width: 30px;
+                margin: 5px;
+                color: $light-gray;
+                font-size: 1.5rem;
+                position: fixed;
             }
         }
 

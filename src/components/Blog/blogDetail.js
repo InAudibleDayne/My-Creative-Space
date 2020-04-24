@@ -63,6 +63,7 @@ export default class BlogDetail extends Component {
   tagCreator(file_location, file_blob, blog_type) {
     if (blog_type === "MUSIC") {
         return <AudioPlayer
+            className='detail-music'
             src={`${file_location ? file_location : file_blob}`}
             onPlay={e => console.log("onPlay")}
             showVolumeControl={true}
@@ -74,7 +75,7 @@ export default class BlogDetail extends Component {
             controls={true}
             />
     } else if (blog_type === "ART") {
-        return <img src={file_location ? file_location : file_blob}/> 
+        return <img className='detail-art'src={file_location ? file_location : file_blob}/> 
     } else if (blog_type === "BOOK" ) {
         const { pageNumber, numPages } = this.state;
 

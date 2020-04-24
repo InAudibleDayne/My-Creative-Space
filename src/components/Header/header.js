@@ -91,12 +91,18 @@ export default class Header extends Component {
     blogLinks() {
         return(
             <div className='header__bar-wrapper'>
+                <div className='header__title-wrapper'>
+                    {this.props.loggedInStatus === 'LOGGED_IN' ? (
+                    <div className='header__name'>
+                        Hey {this.props.firstName}!
+                    </div>) : null}
+                </div>
                 <div className='header__links-wrapper'>
                     <div className='header__links'>
                         <Link to='/'>Home</Link>
                     </div>
                 </div>
-                <div className='header__login-wrapper'>
+                <div className='header__login-wrapper blog-detail-login-wrapper'>
                     <div className='header__login'>
                         {this.loginLogoutDecider()}
                     </div>

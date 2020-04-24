@@ -189,10 +189,10 @@ export default class AccountPage extends Component {
     const blogRecords = this.state.blogItems.map(blogItem => {
       if (this.props.loggedInStatus === "LOGGED_IN"){
           return <div key={blogItem.id} className="admin-blog-wrapper">
-              <BlogItem blogItem={blogItem} />
-              <a onClick={() => this.handleDeleteClick(blogItem)}>
-                  <FontAwesomeIcon icon="trash" />
+              <a className='trash-button' onClick={() => this.handleDeleteClick(blogItem)}>
+                <FontAwesomeIcon icon="trash" />
               </a>
+              <BlogItem blogItem={blogItem} />
           </div>
       } else {
           return <BlogItem key={blogItem.id} blogItem={blogItem} />;
@@ -224,7 +224,8 @@ export default class AccountPage extends Component {
             </div>
             <div className="new-blog-link">
               <a onClick={this.handleNewBlogClick}>
-                  <FontAwesomeIcon icon="plus-circle" />
+                  <FontAwesomeIcon icon="plus-circle" className='new-blog-link__icon'/>
+                  Add New
               </a>
             </div>
 

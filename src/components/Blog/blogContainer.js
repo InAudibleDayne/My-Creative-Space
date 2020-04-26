@@ -26,6 +26,8 @@ class BlogContainer extends Component {
     this.getBlogItems = this.getBlogItems.bind(this);
     this.onScroll = this.onScroll.bind(this);
     window.addEventListener("scroll", this.onScroll, false);
+    this.searchBlogItems = this.searchBlogItems.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentWillMount() {
@@ -100,6 +102,51 @@ class BlogContainer extends Component {
     }
   }
 
+  search(event) {
+    this.setState({
+      blogItems: [],
+      totalCount: 0
+    });
+    if(this.state.search === ''){
+      this.getBlogItems(0)
+    } else {
+    this.searchBlogItems(0, this.state.search);
+    event.preventDefault();
+    }
+  }
+
+  searchBlogItems(offset, keywords) {
+    axios
+        .get(`http://localhost:5000/blogs/search/${keywords}/${offset}`
+        ).then(response => {
+          if(this.state.totalCount === 0){
+            this.setState({
+              blogItems: response.data,
+              totalCount: offset + response.data.length,
+              isLoading: false
+          });
+          } else {
+            if(response.data.length < 10){
+              this.setState({
+                blogItems: this.state.blogItems.concat(response.data),
+                totalCount: 0,
+                isLoading: false,
+                currentPage: 0,
+                stopQuery: true
+            });
+            } else {
+              this.setState({
+                  blogItems: this.state.blogItems.concat(response.data),
+                  totalCount: offset + response.data.length,
+                  isLoading: false
+              });
+            }
+          }
+    }).catch(error => {
+        console.log("getBlogItems error", error);
+    });
+  }
+
   filterResults = (activeFilter) => {
     this.setState({
       stopQuery: false,
@@ -133,7 +180,11 @@ class BlogContainer extends Component {
       this.setState({
         currentPage: this.state.currentPage + 1
       })
-      this.getBlogItems(this.state.totalCount, this.state.filter);
+      if(this.state.search === ''){
+        this.getBlogItems(this.state.totalCount, this.state.filter);
+      } else {
+        this.searchBlogItems(this.state.totalCount, this.state.search);
+      }
     }
   }
 
@@ -161,7 +212,7 @@ class BlogContainer extends Component {
               firstName={this.props.firstName} 
               userId={this.props.userId} 
             />
-            <div className="search-wrapper">
+            <form onSubmit={this.search} className="search-wrapper">
               <input 
                 name="search"
                 type='text'
@@ -169,7 +220,7 @@ class BlogContainer extends Component {
                 value={this.state.search}
                 onChange={this.handleChange}
               />
-            </div>
+            </form>
             <div className='content'>
                 <div className='blog-container'>
                     {blogRecords}

@@ -28,6 +28,8 @@ export default class AccountPage extends Component {
       this.filterResults = this.filterResults.bind(this)
       this.onScroll = this.onScroll.bind(this)
       window.addEventListener("scroll", this.onScroll, false);
+      this.searchBlogItems = this.searchBlogItems.bind(this)
+      this.search = this.search.bind(this)
   }
 
   componentWillMount() {
@@ -102,6 +104,47 @@ export default class AccountPage extends Component {
     }
   }
 
+  search(event) {
+    this.setState({
+      blogItems: [],
+      totalCount: 0
+    });
+    this.searchBlogItems(0, this.state.search);
+    event.preventDefault();
+  }
+
+  searchBlogItems(offset, keywords) {
+      axios
+          .get(`http://localhost:5000/blogs/usersearch/${this.props.userId}/${keywords}/${offset}`
+          ).then(response => {
+            if(this.state.totalCount === 0){
+              this.setState({
+                blogItems: response.data,
+                totalCount: offset + response.data.length,
+                isLoading: false
+            });
+            } else {
+              if(response.data.length < 10){
+                this.setState({
+                  blogItems: this.state.blogItems.concat(response.data),
+                  totalCount: 0,
+                  isLoading: false,
+                  currentPage: 0,
+                  stopQuery: true
+              });
+              } else {
+                this.setState({
+                    blogItems: this.state.blogItems.concat(response.data),
+                    totalCount: offset + response.data.length,
+                    isLoading: false
+                });
+              }
+            }
+      }).catch(error => {
+          console.log("getBlogItems error", error);
+      });
+  }
+
   filterResults = (activeFilter) => {
     this.setState({
       stopQuery: false,
@@ -134,8 +177,12 @@ export default class AccountPage extends Component {
     if ((window.innerHeight + document.documentElement.scrollTop) === document.body.scrollHeight) {
       this.setState({
         currentPage: this.state.currentPage + 1
-      })
-      this.getBlogItems(this.state.totalCount, this.state.filter);
+      });
+      if(this.state.search === ''){
+        this.getBlogItems(this.state.totalCount, this.state.filter);
+      } else {
+        this.searchBlogItems(this.state.totalCount, this.state.search);
+      }
     }
   }
 
@@ -213,7 +260,7 @@ export default class AccountPage extends Component {
             filters={this.filterResults}
             handleLogout={this.handleLogout}
             />
-            <div className="search-wrapper">
+            <form onSubmit={this.search} className="search-wrapper">
               <input 
                 name="search"
                 type='text'
@@ -221,7 +268,7 @@ export default class AccountPage extends Component {
                 value={this.state.search}
                 onChange={this.handleChange}
               />
-            </div>
+            </form>
             <div className="new-blog-link">
               <a onClick={this.handleNewBlogClick}>
                   <FontAwesomeIcon icon="plus-circle" className='new-blog-link__icon'/>

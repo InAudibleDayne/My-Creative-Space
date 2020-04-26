@@ -108,7 +108,8 @@ class BlogContainer extends Component {
       totalCount: 0
     });
     if(this.state.search === ''){
-      this.getBlogItems(0)
+      this.getBlogItems(0);
+      event.preventDefault();
     } else {
     this.searchBlogItems(0, this.state.search);
     event.preventDefault();

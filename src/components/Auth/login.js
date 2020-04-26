@@ -21,6 +21,7 @@ export default class Login extends Component {
         this.responseGoogle = this.responseGoogle.bind(this);
         this.responseFacebook = this.responseFacebook.bind(this);
         this.componentClicked = this.componentClicked.bind(this);
+        this.facebookFailed = this.facebookFailed.bind(this);
       }
     
       handleChange(event) {
@@ -47,6 +48,10 @@ export default class Login extends Component {
       }
 
       responseGoogle = (response) => {
+        console.log(response);
+      }
+
+      facebookFailed(response) {
         console.log(response);
       }
 
@@ -111,9 +116,9 @@ export default class Login extends Component {
                 <FontAwesomeIcon icon={faFacebook} className='facebook-login__logo' />
                 <FacebookLogin
                   appId="253159762538046"
-                  autoLoad={true}
                   fields="name,email,picture"
                   onClick={this.componentClicked}
+                  onFailure={this.facebookFailed}
                   callback={this.responseFacebook}
                   cssClass="facebook-login__btn"
                 />

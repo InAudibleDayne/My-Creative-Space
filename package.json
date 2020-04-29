@@ -2,6 +2,9 @@
   "name": "react-bootstrap",
   "version": "1.0.0",
   "description": "Basic skeleton codebase for React with Bootstrap applications.",
+  "engines": {
+    "node": "12.10.0"
+  },
   "scripts": {
     "preinstall": "npm set audit false",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 export default class Login extends Component {
     constructor(props) {
@@ -111,6 +113,7 @@ export default class Login extends Component {
                 <h2>
                   Login with Facebook
                 </h2>
+                <FontAwesomeIcon icon={faFacebook} className='facebook-login__logo' />
                 <FacebookLogin
                   appId="253159762538046"
                   fields="name,email,picture"

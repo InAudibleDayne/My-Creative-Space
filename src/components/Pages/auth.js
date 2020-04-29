@@ -34,7 +34,7 @@ export default class Auth extends Component {
                 <div
                 className="slideshow-wrapper"
                 style={{
-                    backgroundImage: `url(${this.state.currentSlide})`
+                  backgroundImage: `url(${this.state.currentSlide})`
                 }}
                 />
 

@@ -70,6 +70,7 @@ export default class BlogDetail extends Component {
             />
     } else if (blog_type === "VIDEO") {
         return <ReactPlayer 
+            className='r-player'
             url={`${file_location}`}
             playing={false}
             controls={true}

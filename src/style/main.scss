@@ -40,7 +40,7 @@ a {
 
 .title {
     background: url('https://thumbs.gfycat.com/RemoteImpishBlackbear-poster.jpg') no-repeat center center fixed; 
-    background-size: 100%;
+    background-size: cover;
 }
 
 .app {
@@ -79,4 +79,5 @@ transition: background-color 5000s ease-in-out 0s;
 @import './NoMatch/no-match.scss';
 @import './rich-text-editor.scss';
 @import './Account/account.scss';
+@import './media-queries.scss';
 

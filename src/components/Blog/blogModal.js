@@ -15,7 +15,7 @@ export default class BlogModal extends Component {
                 right: "auto",
                 marginRight: "-50%",
                 transform: "translate(-50%, -50%",
-                width: "800px",
+                width: "80vw",
                 background: "rgb(13, 0, 25, 0.75)",
                 border: "1px solid rgb(212, 1, 141)"
             },

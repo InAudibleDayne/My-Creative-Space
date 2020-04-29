@@ -1,0 +1,135 @@
+@media (max-width: 615px) {
+    .header {
+        &__bar-wrapper{
+            background-size: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: [s] 1fr [n] 1fr [l] 1fr [a];
+            grid-template-columns: [s] 1fr [e];
+        }
+        &__title-wrapper {
+            text-align: center;
+            grid-column: s/e;
+            grid-row: s/n;
+            display: flex;
+            align-items: center;
+        }
+        &__name{
+            margin-top: 0px;
+        }
+        &__links-wrapper {
+            grid-row: l/a;
+            padding: 5px;
+        }
+        &__login-wrapper{
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            grid-row: n/l;
+            grid-column: s/e;
+            height: 100%;
+            .header__links{
+                margin-bottom: 10px;
+                margin-left: 0px;
+            }
+        }
+        &__login{
+            margin-top: 0px;
+        }
+    }
+}
+
+.search-wrapper {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.blog-item-wrapper {
+    flex-direction: column;
+    .left-side {
+        img{
+            max-width: 80vw;
+        }
+    }
+}
+
+.r-player {
+    width: 400px !important;
+    height: 250px !important;
+}
+
+.BOOK {
+    .left-side{
+        text-align: center;
+        margin: 0px;
+    }
+}
+
+.pdf {
+    width: 80vw;
+    height: 100%;
+}
+
+.content-container{
+    .admin-blog-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        .trash-button {
+            text-align: center;
+            position: relative;
+            padding-left: 20px;
+            padding-right: -20px;
+            margin-right: -10px;
+        }
+    }
+}
+
+.left {
+    margin-left: 0px;
+}
+
+.blog-detail {
+    &__container{
+        grid-template-columns: [s] 1fr [m] 1fr [e];
+    }
+    &__media {
+        grid-column: s/e;
+    }
+    &__description {
+        grid-row: media-e/d;
+        grid-column: s/e;
+    }
+}
+
+.detail-art {
+    width: 80vw;
+}
+
+.auth-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    .login {
+        .google-login{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        }
+        .separater{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .facebook-login{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            &__logo {
+                display: none;
+            }
+        }
+    }
+}

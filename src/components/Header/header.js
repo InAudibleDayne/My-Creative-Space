@@ -37,8 +37,12 @@ export default class Header extends Component {
             return <Link className="left" to='/login'>Login</Link>
         } else {
             return <div className='logout'>
-                <Link className="logout__account-link" to='/user-account'>Account</Link>
-                <a className="logout__logout-link" onClick={this.handleSignOut}>Logout</a>
+                <div>
+                    <Link className="logout__account-link" to='/user-account'>Account</Link>
+                </div>
+                <div>
+                    <a className="logout__logout-link" onClick={this.handleSignOut}>Logout</a>
+                </div>
             </div>
         }
     }
@@ -124,16 +128,16 @@ export default class Header extends Component {
                         All
                     </div>
                     <div id='MUSIC' className={`header__links ${this.state.active === 'MUSIC' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
-                        My Music
+                        Music
                     </div>
                     <div id='VIDEO' className={`header__links ${this.state.active === 'VIDEO' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
-                        My Videos
+                        Videos
                     </div>
                     <div id='BOOK' className={`header__links ${this.state.active === 'BOOK' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
-                        My Books
+                        Books
                     </div>
                     <div id='ART' className={`header__links ${this.state.active === 'ART' ? 'active' : null}`} onClick={() => this.handleClick(event)}>
-                        My Art
+                        Art
                     </div>
                 </div>
                 <div className='header__login-wrapper'>

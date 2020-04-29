@@ -2,7 +2,7 @@
     &__container {
     display: grid;
     grid-template-columns: 150px [s] 1fr [m] 1fr [e] 150px;
-    grid-template-rows: [date-s] 5vh [date-e title-s] 5vh [title-e media-s] auto [buttons-s] 20px [media-e] 50px;    
+    grid-template-rows: 5vh [title-s] 5vh [title-e media-s] auto [buttons-s] 20px [media-e] 1fr [d] 50px;    
     color: $magenta;
     font-size: 2rem;
     font-weight: 900;
@@ -10,13 +10,6 @@
     &__title {
         grid-column: s/e;
         grid-row: title-s/title-e;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    &__date {
-        grid-column: s/e;
-        grid-row: date-s/date-e;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -40,6 +33,7 @@
         overflow: visible;
         margin-top: 25px;
         margin-bottom: 50px;
+        color: $light-gray;
     }
 }
 

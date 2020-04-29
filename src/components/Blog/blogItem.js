@@ -51,6 +51,7 @@ export default class BlogItem extends Component {
                 />
         } else if (this.state.blog_type === "VIDEO") {
             return <ReactPlayer 
+                className='r-player'
                 url={`${this.state.file_location ? this.state.file_location : this.state.file_blob}`}
                 playing={false}
                 controls={true}

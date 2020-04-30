@@ -29,12 +29,12 @@
     "sass",
     "css module"
   ],
-  "author": "Your Name Here",
+  "author": "Dayne Bechtold",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bottega-code-school/js-builder/issues"
+    "url": "https://github.com/InAudibleDayne/My-Creative-Space/issues"
   },
-  "homepage": "https://github.com/bottega-code-school/js-builder",
+  "homepage": "https://my-creative-space.herokuapp.com/",
   "dependencies": {
     "3.0.0": "^3.0.0",
     "@babel/core": "^7.9.6",

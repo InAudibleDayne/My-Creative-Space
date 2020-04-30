@@ -15,7 +15,8 @@ export default class AccountPage extends Component {
         blogItems: [],
         currentPage: 0,
         totalCount: 0,
-        stopQuery: false
+        stopQuery: false,
+        isLoading: true
       }
 
       this.handleChange = this.handleChange.bind(this)
@@ -43,7 +44,7 @@ export default class AccountPage extends Component {
   getBlogItems(offset, filter = null) {
     if(filter){
       axios
-          .get(`http://localhost:5000/blogs/user/${this.props.userId}/${filter}/${offset}`
+          .get(`https://my-creative-space-backend.herokuapp.com/blogs/user/${this.props.userId}/${filter}/${offset}`
           ).then(response => {
             if(this.state.totalCount === 0){
               this.setState({
@@ -73,7 +74,7 @@ export default class AccountPage extends Component {
       });
     } else {
       axios
-        .get(`http://localhost:5000/blogs/user/${this.props.userId}/${offset}`
+        .get(`https://my-creative-space-backend.herokuapp.com/blogs/user/${this.props.userId}/${offset}`
         ).then(response => {
           if(this.state.totalCount === 0){
             this.setState({
@@ -115,7 +116,7 @@ export default class AccountPage extends Component {
 
   searchBlogItems(offset, keywords) {
       axios
-          .get(`http://localhost:5000/blogs/usersearch/${this.props.userId}/${keywords}/${offset}`
+          .get(`https://my-creative-space-backend.herokuapp.com/blogs/usersearch/${this.props.userId}/${keywords}/${offset}`
           ).then(response => {
             if(this.state.totalCount === 0){
               this.setState({
@@ -211,7 +212,7 @@ export default class AccountPage extends Component {
 
   handleDeleteClick(blog) {
     axios.delete(
-      `http://localhost:5000/blog/${blog.id}`
+      `https://my-creative-space-backend.herokuapp.com/blog/${blog.id}`
       ).then(response => {
           this.setState({
               blogItems: this.state.blogItems.filter(blogItem => {
@@ -279,6 +280,11 @@ export default class AccountPage extends Component {
             <div className="content-container">
                 {blogRecords}
             </div>
+
+            {this.state.isLoading ? (
+            <div className="content-loader">
+              <FontAwesomeIcon icon="spinner" spin />
+            </div>) : null}
         </div>
     );
   }

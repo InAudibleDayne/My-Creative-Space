@@ -35,7 +35,7 @@ export default class Login extends Component {
         var userName = response.profileObj.email;
         var firstName = response.profileObj.givenName;
         axios({method: 'post',
-              url: 'http://localhost:5000/user',
+              url: 'https://my-creative-space-backend.herokuapp.com/user',
               data: {username: `${userName}`, name: `${firstName}`}})
               .then(response => {
                 var userId = response.data.id;
@@ -57,7 +57,6 @@ export default class Login extends Component {
 
       handleSubmit(event) {
         //TODO add call to databases to confirm login
-          console.log('Form Submitted', event);
           event.preventDefault();
           this.setState({
               email: "",
@@ -74,7 +73,7 @@ export default class Login extends Component {
         var userName = response.id;
         var firstName = response.name;
         axios({method: 'post',
-              url: 'http://localhost:5000/user',
+              url: 'https://my-creative-space-backend.herokuapp.com/user',
               data: {username: `${userName}`, name: `${firstName}`}})
               .then(response => {
                 var userId = response.data.id;

@@ -30,15 +30,13 @@ export default class BlogDetail extends Component {
   }
 
   componentWillMount() {
-    console.log(this.state.currentId)
     this.getBlogItem();
   }
 
   getBlogItem() {
     //TODO write get function for backend
-    axios.get(`http://localhost:5000/blog/${this.state.currentId}`
+    axios.get(`https://my-creative-space-backend.herokuapp.com/blog/${this.state.currentId}`
     ).then(response => {
-        console.log(response.data)
         this.setState({
             blogItem: response.data
         })

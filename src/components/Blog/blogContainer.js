@@ -41,7 +41,7 @@ class BlogContainer extends Component {
   getBlogItems(offset, filter = null) {
     if(filter){
       axios
-          .get(`http://localhost:5000/blogs/sort/${filter}/${offset}`
+          .get(`https://my-creative-space-backend.herokuapp.com/blogs/sort/${filter}/${offset}`
           ).then(response => {
             if(this.state.totalCount === 0){
               this.setState({
@@ -71,7 +71,7 @@ class BlogContainer extends Component {
       });
     } else {
       axios
-        .get(`http://localhost:5000/blogs/${offset}`
+        .get(`https://my-creative-space-backend.herokuapp.com/blogs/${offset}`
         ).then(response => {
           if(this.state.totalCount === 0){
             this.setState({
@@ -118,7 +118,7 @@ class BlogContainer extends Component {
 
   searchBlogItems(offset, keywords) {
     axios
-        .get(`http://localhost:5000/blogs/search/${keywords}/${offset}`
+        .get(`https://my-creative-space-backend.herokuapp.com/blogs/search/${keywords}/${offset}`
         ).then(response => {
           if(this.state.totalCount === 0){
             this.setState({

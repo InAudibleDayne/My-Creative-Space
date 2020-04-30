@@ -19,7 +19,7 @@ export default class BlogForm extends Component {
             content: "",
             featured_image: "",
             file_location: "",
-            apiUrl: "http://localhost:5000/blog",
+            apiUrl: "https://my-creative-space-backend.herokuapp.com/blog",
             apiAction: "post"
         };
 
@@ -46,7 +46,7 @@ export default class BlogForm extends Component {
                 title: this.props.blog.title,
                 blog_status: this.props.blog.blog_status,
                 content: this.props.blog.content,
-                apiUrl: `http://localhost:5000/blog/${this.props.blog.id}`,
+                apiUrl: `https://my-creative-space-backend.herokuapp.com/blog/${this.props.blog.id}`,
                 apiAction: "patch"
             })
         }
@@ -125,7 +125,7 @@ export default class BlogForm extends Component {
     deleteImage(imageType) {
         axios
             .delete(
-                `http://localhost:5000/blog/${this.props.blog.id}?image_type=${imageType}`
+                `https://my-creative-space-backend.herokuapp.com/blog/${this.props.blog.id}?image_type=${imageType}`
             )
             .then(response => {
                 this.props.handleFeaturedImageDelete();
@@ -148,7 +148,6 @@ export default class BlogForm extends Component {
             data: this.buildForm()
           })
           .then(response => {
-              console.log("response from server", response.data)
                 if (this.state.featured_image) {
                     this.featuredImageRef.current.dropzone.removeAllFiles();
                 };

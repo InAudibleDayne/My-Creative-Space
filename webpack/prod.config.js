@@ -10,7 +10,9 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = webpackMerge(webpackCommon, {
   bail: true,
@@ -32,39 +34,78 @@ module.exports = webpackMerge(webpackCommon, {
   module: {
     rules: [
       {
-        test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: true,
-                importLoaders: 2
-              }
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
             },
-            {
-              loader: "postcss-loader",
-              options: {
-                config: {
-                  path: path.resolve(__dirname, "postcss.config.js")
-                },
-                sourceMap: true
-              }
-            },
-            {
-              loader: "sass-loader",
-              options: {
-                outputStyle: "expanded",
-                sourceMap: true,
-                sourceMapContents: true
-              }
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              importLoaders: 2
             }
-          ]
-        })
-      }
-    ]
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              config: {
+                path: path.resolve(__dirname, "postcss.config.js")
+              },
+              sourceMap: true
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              outputStyle: "expanded",
+              sourceMap: true,
+              sourceMapContents: true
+            }
+          }
+        ],
+      },
+    ],
   },
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.s?css$/,
+  //       use: ExtractTextPlugin.extract({
+  //         fallback: "style-loader",
+  //         use: [
+  //           {
+  //             loader: "css-loader",
+  //             options: {
+  //               sourceMap: true,
+  //               importLoaders: 2
+  //             }
+  //           },
+  //           {
+  //             loader: "postcss-loader",
+  //             options: {
+  //               config: {
+  //                 path: path.resolve(__dirname, "postcss.config.js")
+  //               },
+  //               sourceMap: true
+  //             }
+  //           },
+  //           {
+  //             loader: "sass-loader",
+  //             options: {
+  //               outputStyle: "expanded",
+  //               sourceMap: true,
+  //               sourceMapContents: true
+  //             }
+  //           }
+  //         ]
+  //       })
+  //     }
+  //   ]
+  // },
 
   plugins: [
     new HtmlWebpackPlugin({
@@ -87,7 +128,7 @@ module.exports = webpackMerge(webpackCommon, {
     new CopyWebpackPlugin([{ from: path.resolve(__dirname, "../static") }], {
       ignore: ["index.html", "favicon.ico"]
     }),
-    new CleanWebpackPlugin(["dist"], {
+    new CleanWebpackPlugin({
       root: path.resolve(__dirname, ".."),
       exclude: ".gitignore"
     }),
@@ -96,12 +137,12 @@ module.exports = webpackMerge(webpackCommon, {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin("[name]-[chunkhash].min.css"),
+    new MiniCssExtractPlugin("[name]-[chunkhash].min.css"),
     new UglifyJsPlugin({
       uglifyOptions: {
+        warnings: false,
         compress: {
-          ie8: true,
-          warnings: false
+          ie8: true
         },
         mangle: {
           ie8: true

@@ -1,8 +1,0 @@
-{
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/da54d24e-d3de-4dc6-b4dc-6d6e3b9ccc74/resourceGroups/My-creative-space/providers/Microsoft.Web/sites/My-creative-space",
-    "appService.deploySubpath": ""
-}

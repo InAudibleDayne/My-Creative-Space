@@ -5,7 +5,9 @@
             height: 100%;
             display: grid;
             grid-template-rows: [s] 1fr [n] 1fr [l] 1fr [a];
-            grid-template-columns: [s] 1fr [e];
+            grid-template-columns: 5vw [s] 1fr [e] 5vw;
+            justify-items: center;
+            align-items: center;
         }
         &__title-wrapper {
             text-align: center;
@@ -19,7 +21,14 @@
         }
         &__links-wrapper {
             grid-row: l/a;
+            grid-column: s/e;
             padding: 5px;
+            width: 80vw;
+            align-items: center;
+        }
+        &__links{
+            font-size: 1.5rem;
+            text-align: center;
         }
         &__login-wrapper{
             display: flex;
@@ -147,5 +156,9 @@
                 }
             }
         }
+    }
+
+    .title {
+        font-size: 2rem;
     }
 }

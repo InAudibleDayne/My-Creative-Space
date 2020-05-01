@@ -5,7 +5,7 @@ import DropzoneComponent from "react-dropzone-component";
 import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
 import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
 
-import RichTextEditor from "../forms/rich-text-editor";
+import RichTextEditor from "./rich-text-editor";
 
 export default class BlogForm extends Component {
     constructor(props) {

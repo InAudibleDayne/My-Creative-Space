@@ -84,9 +84,11 @@ export default class Header extends Component {
 
     authLinks() {
         return(
-            <div className='header__links-wrapper'>
-                <div className='header__links'>
-                    <Link to='/'>Home</Link>
+            <div className='header__auth-wrapper'>
+                <div className='header__links-wrapper'>
+                    <div className='header__links'>
+                        <Link to='/'>Home</Link>
+                    </div>
                 </div>
             </div>
         )

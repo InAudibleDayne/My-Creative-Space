@@ -103,7 +103,7 @@
     "react-truncate": "^2.4.0",
     "redux": "^4.0.5",
     "rich-text-editor": "^4.7.2",
-    "sanitize-html": "^1.23.0",
+    "sanitize-html": "^2.3.2",
     "striptags": "^3.1.1",
     "style-loader": "^1.2.1",
     "typescript": "^3.8.3",

@@ -104,7 +104,7 @@
     "redux": "^4.0.5",
     "rich-text-editor": "^4.7.2",
     "sanitize-html": "^1.23.0",
-    "striptags": "^3.1.1",
+    "striptags": "^3.2.0",
     "style-loader": "^1.2.1",
     "typescript": "^3.8.3",
     "webpack-cli": "^3.3.11",
